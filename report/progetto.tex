@@ -44,10 +44,10 @@
 
 \newcommand{\courseacronym}{CAT}
 \newcommand{\coursename}{Linea Guida Report\\Controlli Automatici - T}
-\newcommand{\tipology}{\dots}
-\newcommand{\trace}{\dots}
-\newcommand{\projectname}{Nome del Progetto}
-\newcommand{\group}{\dots}
+\newcommand{\tipology}{B}
+\newcommand{\trace}{1}
+\newcommand{\projectname}{Controllo di uno scaldatore elettrico}
+\newcommand{\group}{23}
 
 %opening
 \title{ \vspace{-1in}
@@ -60,7 +60,7 @@
 		\Large  \strut Gruppo \group\strut
 		\vspace{-0.4cm}
 }
-\author{Autore, \dots}
+\author{Nobili Giacomo, Raffoni Federico, Roca Marco}
 \date{}
 
 \begin{document}
@@ -68,15 +68,30 @@
 \maketitle
 \vspace{-0.5cm}
 
-Il progetto riguarda il controllo di \dots, la cui dinamica viene descritta dalle seguenti equazioni differenziali 
+Il progetto riguarda il controllo di uno scaldatore elettrico, la cui dinamica viene descritta dalle seguenti equazioni differenziali 
 %
 \begin{subequations}\label{eq:system}
 \begin{align}
-	\dots,
+	m_Rc_R\frac{dT_R(t)}{dt}=h_RA_R(T_{out}(t)-T_R(t)) + \frac{P_E(t)}{(1 + \kappa T_R)} \\
+	m_Ac_A\frac{dT_{out}(t)}{dt}=\dot{m}_Ac_A(T_{in}-T_{out}(t)) + h_RA_R(T_R(t)-T_{out}(t)),
 \end{align}
 \end{subequations}
 %
-dove \dots rappresenta \dots.
+dove
+
+\begin{itemize}
+	\item $T_R(t)$ è la temperatura del riscaldatore [C°];
+	\item $T_{out}(t)$ è la temperatura dell'aria in uscita dal riscaldatore [C°];
+	\item $P_E(t)$ è la potenza elettrica fornita [W];
+	\item $T_{in}$ è la temperatura dell'aria in ingresso (ambiente a temperatura costante) [C°];
+	\item $m_R$ è la massa del riscaldatore [kg];
+	\item $c_R$ è il calore specifico del riscaldatore [J/(kg C°)];
+	\item $h_R$ è il coefficiente di convezione tra riscaldatore e aria [m²];
+	\item $\kappa$ è il coefficiente di variazione della resistenza con la temperatura [1/C°];
+	\item $m_A$ è la massa dell'aria [kg];
+	\item $c_A$ è il calore specifico dell'aria [J/(kg C°)];
+	\item $\dot{m}_A$ è la portata massica dell'aria; 
+\end{itemize}
 
 
 \section{Espressione del sistema in forma di stato e calcolo del sistema linearizzato intorno ad una coppia di equilibrio}
@@ -94,7 +109,11 @@ Innanzitutto, esprimiamo il sistema~\eqref{eq:system} nella seguente forma di st
 Pertanto, andiamo individuare lo stato $x$, l'ingresso $u$ e l'uscita $y$ del sistema come segue 
 %
 \begin{align*}
-	x := \dots, \quad u := \dots, \quad y := \dots.
+	x := \begin{bmatrix}
+		T_R
+		\\
+		T_{out}
+	\end{bmatrix}, \quad u := P_E, \quad y := T_{out}
 \end{align*}
 %
 Coerentemente con questa scelta, ricaviamo dal sistema~\eqref{eq:system} la seguente espressione per le funzioni $f$ ed $h$

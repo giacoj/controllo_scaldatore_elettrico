@@ -44,7 +44,7 @@ A4 = -m_A_dot/m_A-(h_R*A_R)/(m_A*c_A);                          % df2/dx2
 A = [A1 A2; A3 A4];                                             % matrice 2x2
 
 % Matrice B
-B1 = 1/(m_R*c_R)/(1+K*x_e(1));                                  % df1/du
+B1 = (1/(m_R*c_R))/(1+K*x_e(1));                                  % df1/du
 B2 = 0;                                                         % df2/du
 
 B = [B1; B2];                                                   % matrice 2x1
@@ -65,7 +65,7 @@ modello = ss(A, B, C, D);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Punto 2
 % Funzione di trasferimento G(s) tale che δY (s) = G(s)δU(s)
-G = tf(modello);
+G = tf(modello)
 
 % Poli di G(s)
 p = pole(G);
