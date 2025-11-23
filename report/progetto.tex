@@ -48,6 +48,10 @@
 \newcommand{\trace}{1}
 \newcommand{\projectname}{Controllo di uno scaldatore elettrico}
 \newcommand{\group}{23}
+\newcommand{\myalpha}{\dfrac{h_RA_R}{m_RC_R}}
+\newcommand{\mybeta}{\dfrac{1}{m_Rc_R}}
+\newcommand{\mygamma}{\dfrac{\dot{m}_A}{m_A}}
+\newcommand{\myphi}{\dfrac{h_RA_R}{m_Ac_A}}
 
 %opening
 \title{ \vspace{-1in}
@@ -72,8 +76,8 @@ Il progetto riguarda il controllo di uno scaldatore elettrico, la cui dinamica v
 %
 \begin{subequations}\label{eq:system}
 \begin{align}
-	m_Rc_R\frac{dT_R(t)}{dt}=h_RA_R(T_{out}(t)-T_R(t)) + \frac{P_E(t)}{(1 + \kappa T_R)} \\
-	m_Ac_A\frac{dT_{out}(t)}{dt}=\dot{m}_Ac_A(T_{in}-T_{out}(t)) + h_RA_R(T_R(t)-T_{out}(t)),
+	m_Rc_R\frac{dT_R(t)}{dt} &= h_RA_R(T_{out}(t)-T_R(t)) + \frac{P_E(t)}{(1 + \kappa T_R)} \\
+	m_Ac_A\frac{dT_{out}(t)}{dt} &= \dot{m}_Ac_A(T_{in}-T_{out}(t)) + h_RA_R(T_R(t)-T_{out}(t)),
 \end{align}
 \end{subequations}
 %
@@ -90,7 +94,7 @@ dove
 	\item $\kappa$ è il coefficiente di variazione della resistenza con la temperatura [1/C°];
 	\item $m_A$ è la massa dell'aria [kg];
 	\item $c_A$ è il calore specifico dell'aria [J/(kg C°)];
-	\item $\dot{m}_A$ è la portata massica dell'aria; 
+	\item $\dot{m}_A$ è la portata massica dell'aria [kg/s].
 \end{itemize}
 
 
@@ -172,17 +176,27 @@ L'evoluzione del sistema espressa nelle variabili alle variazioni pu\`o essere a
 %
 dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
 %
+\renewcommand{\arraystretch}{2}
 \begin{subequations}\label{eq:matrices}
 \begin{align}
-	A &= \dots
+	A &= \begin{bmatrix}
+		-(\myalpha + \mybeta \dfrac{u_e\kappa}{(1+\kappa x_{1e})^2}) & \myalpha \\
+		\myphi & - \myphi - \mygamma
+	\end{bmatrix}
 	\\
-	B &= \dots
+	B &= \begin{bmatrix}
+		\dfrac{1}{(m_Rc_R)(1+\kappa x_{1e})}\\
+		0
+	\end{bmatrix}
 	\\
-	C &= \dots
+	C &= \begin{bmatrix}
+		0 & 1
+	\end{bmatrix}
 	\\
-	D &= \dots.
+	D &= 0.
 \end{align}
 \end{subequations}
+\renewcommand{\arraystretch}{1}
 %
 \section{Calcolo Funzione di Trasferimento}
 

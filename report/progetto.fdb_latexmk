@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1763910726.5695 "/home/giaco/controllo_scaldatore_elettrico/tex/progetto.tex" "progetto.pdf" "progetto" 1763910727.51322 0
+["pdflatex"] 1763922188.0517 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1763922189.19185 0
   "/etc/texmf/web2c/texmf.cnf" 1759752535.30532 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giaco/controllo_scaldatore_elettrico/tex/progetto.tex" 1763910726.32941 9779 ad9d2038e2d78b58043e4afe248be481 ""
+  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1763922186.61668 10263 6d74c379e3032eb017e67697e28b9cea ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -208,9 +208,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1763907094.92903 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1763907120 8214466 d82ca926959f88ddd4c2070af4adcba1 ""
-  "progetto.aux" 1763910727.39943 4946 aacc9e52e2e231e682c2ab9fa714c235 "pdflatex"
-  "progetto.out" 1763910727.40043 2476 5774a2b65b3e9e7d377c5b3e777df3b0 "pdflatex"
-  "progetto.tex" 1763910726.32941 9779 ad9d2038e2d78b58043e4afe248be481 ""
+  "progetto.aux" 1763922189.06181 4946 b65b1a7a29aba2986c776f93c0e806cd "pdflatex"
+  "progetto.out" 1763922189.06381 2476 5774a2b65b3e9e7d377c5b3e777df3b0 "pdflatex"
+  "progetto.tex" 1763922186.61668 10263 6d74c379e3032eb017e67697e28b9cea ""
   (generated)
   "progetto.aux"
   "progetto.log"
