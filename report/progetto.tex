@@ -48,7 +48,7 @@
 \newcommand{\trace}{1}
 \newcommand{\projectname}{Controllo di uno scaldatore elettrico}
 \newcommand{\group}{23}
-\newcommand{\myalpha}{\dfrac{h_RA_R}{m_RC_R}}
+\newcommand{\myalpha}{\dfrac{h_RA_R}{m_Rc_R}}
 \newcommand{\mybeta}{\dfrac{1}{m_Rc_R}}
 \newcommand{\mygamma}{\dfrac{\dot{m}_A}{m_A}}
 \newcommand{\myphi}{\dfrac{h_RA_R}{m_Ac_A}}
@@ -76,7 +76,7 @@ Il progetto riguarda il controllo di uno scaldatore elettrico, la cui dinamica v
 %
 \begin{subequations}\label{eq:system}
 \begin{align}
-	m_Rc_R\frac{dT_R(t)}{dt} &= h_RA_R(T_{out}(t)-T_R(t)) + \frac{P_E(t)}{(1 + \kappa T_R)} \\
+	m_Rc_R\frac{dT_R(t)}{dt} &= h_RA_R(T_{out}(t)-T_R(t)) + \frac{P_E(t)}{(1 + \kappa T_R(t))} \\
 	m_Ac_A\frac{dT_{out}(t)}{dt} &= \dot{m}_Ac_A(T_{in}-T_{out}(t)) + h_RA_R(T_R(t)-T_{out}(t)),
 \end{align}
 \end{subequations}
@@ -123,7 +123,7 @@ Pertanto, andiamo individuare lo stato $x$, l'ingresso $u$ e l'uscita $y$ del si
 Coerentemente con questa scelta, ricaviamo dal sistema~\eqref{eq:system} la seguente espressione per le funzioni $f$ ed $h$
 %
 \begin{align*}
-	f(x,u) &:= \dots
+	f(x,u) &:= \dots.
 	\\
 	h(x,u) &:= \dots.
 \end{align*}
@@ -135,10 +135,15 @@ Una volta calcolate $f$ ed $h$ esprimiamo~\eqref{eq:system} nella seguente forma
 	\begin{bmatrix}
 		\dot{x}_1
 		\\
-		\dots
-	\end{bmatrix} &= \dots \label{eq:state_form_1}
-	\\
-	y &= \dots.
+		\dot{x}_2
+	\end{bmatrix} &=
+	\begin{bmatrix}
+		\myalpha x_2 - \myalpha x_1 + \dfrac{u}{(m_Rc_R)(1+\kappa x_1)} \\ \\
+		\mygamma T_{in} - (\mygamma + \myphi) x_2 + \myphi x_1
+	\end{bmatrix} 
+	\label{eq:state_form_1}
+	\\ \\
+	y &= x_2
 \end{align}
 \end{subequations}
 %
