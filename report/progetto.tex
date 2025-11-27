@@ -20,6 +20,7 @@
 \usepackage{amsmath}
 \usepackage{latexsym}
 \usepackage{amsthm}
+\usepackage{mathtools}
 %\usepackage{subfigure}
 \usepackage{subcaption}
 \usepackage{psfrag}
@@ -208,11 +209,66 @@ dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
 In questa sezione, andiamo a calcolare la funzione di trasferimento $G(s)$ dall'ingresso $\delta u$ all'uscita $\delta y$ mediante la seguente formula 
 %
 %
+\begin{align*}
+G(s) = C \dfrac{adj(sI-A)}{det(sI-A)}B + D
+\end{align*}
+
+Procediamo per passi e calcoliamo prima il determinante di $sI-A$:
+
+\begin{align*}
+	det(sI-A) = (s + \myalpha + \dfrac{u_e\kappa}{(m_Rc_R)(1+\kappa x_{1e})^2})(s + \mygamma + \myphi) - \dfrac{(h_RA_R)^2}{m_Am_Rc_Ac_R}
+\end{align*}
+
+
+
+poi la matrice aggiunta di $sI - A$. Visto che quest'ultima è una matrice $2x2$, vale la seguente:
+
+$$ adj\Big(\begin{bmatrix}
+	a & b\\
+	c & d
+\end{bmatrix}\Big) = \begin{bmatrix}
+	d & -b\\
+	-c & a
+\end{bmatrix}$$
+
+e quindi: 
+
+$$adj(sI-A) = \begin{bmatrix}
+	s + \mygamma + \myphi & \myalpha\\ \\
+	\myphi & s + \myalpha \dfrac{u_e\kappa}{(m_Rc_R)(1+\kappa x_{1e})^2}
+\end{bmatrix}$$
+
+Mettendo tutto insieme abbiamo: 
+
+\begin{align*}
+	G(s) = \dfrac{1}{det(sI-A)}
+	\begin{bmatrix} 0 & 1 \end{bmatrix}
+	\begin{bmatrix}
+		s + \mygamma + \myphi & \myalpha\\ \\
+	\myphi & s + \myalpha \dfrac{u_e\kappa}{(m_Rc_R)(1+\kappa x_{1e})^2}
+	\end{bmatrix}
+	\begin{bmatrix}
+		\dfrac{1}{(m_Rc_R)(1+\kappa x_{1e})}\\
+		0
+	\end{bmatrix}
+\end{align*}
+
+Infine, sostituendo i parametri e svolgendo i calcoli si ottiene la seguente:
 \begin{align}\label{eq:transfer_function}
-G(s) = \dots = \dots.
+	\setlength{\fboxsep}{10pt}
+	\Aboxed{ G(s) = \dfrac{2.407 \cdot 10^-5}{s^2 + 1.968s + 8.152 \cdot 10^-3} }
 \end{align}
+
 %
-Dunque il sistema linearizzato~\eqref{eq:linearized_system} è caratterizzato dalla funzione di trasferimento~\eqref{eq:transfer_function} con $\dots$ poli $p_1 = \cdots, \cdots$ e $\dots$ zeri $z_i =\cdots$. In Figura \dots mostriamo il corrispondente diagramma di Bode.
+Dunque il sistema linearizzato~\eqref{eq:linearized_system}
+è caratterizzato dalla funzione di trasferimento~\eqref{eq:transfer_function}
+con 2 poli
+\begin{align*}
+	p_1 &= -1.964 \\ 
+	p_2 &= -0.0042
+\end{align*}
+
+e nessuno zero. In Figura \dots mostriamo il corrispondente diagramma di Bode.
 
 \dots
 
