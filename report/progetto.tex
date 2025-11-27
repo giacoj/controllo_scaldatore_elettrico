@@ -151,13 +151,41 @@ Una volta calcolate $f$ ed $h$ esprimiamo~\eqref{eq:system} nella seguente forma
 Per trovare la coppia di equilibrio $(x_e, u_e)$ di~\eqref{eq:our_system_state_form}, andiamo a risolvere il seguente sistema di equazioni
 %
 \begin{align}
-	\dots,
-\end{align}
+	\begin{cases}
+		f_1(x, u) = 0\\
+		f_2(x, u) = 0
+	\end{cases}
+	=
+	\begin{cases}
+		\myalpha ( x_{2e} - x_{1e}) + \dfrac{u_e}{(m_Rc_R)(1 + \kappa x_{1e})} = 0\\ \\
+		\mygamma T_{in} - (\mygamma + \myphi) x_{2e} + \myphi x_{1e} = 0
+	\end{cases}
+\end{align}\\
+Abbiamo tre parametri $(x_{1e}, x_{2e}, u_e)$ per due equazioni, quindi ci sono un numero infinito di coppie di equilibrio.
+Tuttavia noi siamo interessati alla coppia di equilibrio che si ottiene fissando $x = x_e$ tale che:
+\begin{align*}
+	x_e = \begin{bmatrix}
+		x_{1e}\\
+		x_{2e}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		T_{R,e}\\
+		T_{out,e}
+	\end{bmatrix}
+\end{align*}\\
+Consideriamo quindi solo la prima equazione e isoliamo $u_e$:\\
+\begin{align*}
+	u_e = h_RA_R(x_{2e}-x_{1e})(1+\kappa x_{1e})
+\end{align*}
 %
-dal quale otteniamo
+dal quale otteniamo, sostituendo i parametri
 %
 \begin{align}
-	x_e := \dots,  \quad u_e = \dots.\label{eq:equilibirum_pair}
+	x_e := \begin{bmatrix}
+		200 \text{ °C}\\
+		80 \text{ °C}
+	\end{bmatrix},  \quad u_e = \dots W.\label{eq:equilibirum_pair}
 \end{align}
 %
 Definiamo le variabili alle variazioni $\delta x$, $\delta u$ e $\delta y$ come 
@@ -189,16 +217,16 @@ dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
 		-(\myalpha + \mybeta \dfrac{u_e\kappa}{(1+\kappa x_{1e})^2}) & \myalpha \\
 		\myphi & - \myphi - \mygamma
 	\end{bmatrix}
-	\\
+	\\ \\
 	B &= \begin{bmatrix}
 		\dfrac{1}{(m_Rc_R)(1+\kappa x_{1e})}\\
 		0
 	\end{bmatrix}
-	\\
+	\\ \\
 	C &= \begin{bmatrix}
 		0 & 1
 	\end{bmatrix}
-	\\
+	\\ \\
 	D &= 0.
 \end{align}
 \end{subequations}
@@ -251,24 +279,23 @@ Mettendo tutto insieme abbiamo:
 		\dfrac{1}{(m_Rc_R)(1+\kappa x_{1e})}\\
 		0
 	\end{bmatrix}
-\end{align*}
+\end{align*}\\
 
-Infine, sostituendo i parametri e svolgendo i calcoli si ottiene la seguente:
+Infine, sostituendo i parametri e svolgendo i calcoli si ottiene la funzione di trasferimento del sistema:
 \begin{align}\label{eq:transfer_function}
-	\setlength{\fboxsep}{10pt}
+	\setlength{\fboxsep}{20pt}
 	\Aboxed{ G(s) = \dfrac{2.407 \cdot 10^-5}{s^2 + 1.968s + 8.152 \cdot 10^-3} }
 \end{align}
 
 %
 Dunque il sistema linearizzato~\eqref{eq:linearized_system}
 è caratterizzato dalla funzione di trasferimento~\eqref{eq:transfer_function}
-con 2 poli
+con \textbf{2 poli} e \textbf{nessuno zero}. I poli (indicati con $p_1$ e $p_2$) sono i seguenti: 
 \begin{align*}
 	p_1 &= -1.964 \\ 
 	p_2 &= -0.0042
-\end{align*}
-
-e nessuno zero. In Figura \dots mostriamo il corrispondente diagramma di Bode.
+\end{align*}\\
+In Figura \dots mostriamo il corrispondente diagramma di Bode.
 
 \dots
 
