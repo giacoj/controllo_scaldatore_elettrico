@@ -20,7 +20,6 @@ T_out_e = 80;        %  temperatura dell'aria in uscita dal riscaldatore di equi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Punto 1
-% A) 
 % Funzione dello stato del sistema
 x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K*x(1));
                 m_A_dot/m_A*T_in-(m_A_dot/m_A+(h_R*A_R)/(m_A*c_A))*x(2)+(h_R*A_R)/(m_A*c_A)*x(1)];
@@ -28,7 +27,6 @@ x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K
 % Funzione dell'uscita del sistema
 y = @(t,x)[0; x(2)];
 
-% B) 
 % Coppia di equilibrio
 x_e = [T_R_e; T_out_e];
 u_e = (h_R*A_R)*(x_e(1) - x_e(2))*(1 + K*x_e(1));
@@ -44,7 +42,7 @@ A4 = -m_A_dot/m_A-(h_R*A_R)/(m_A*c_A);                          % df2/dx2
 A = [A1 A2; A3 A4];                                             % matrice 2x2
 
 % Matrice B
-B1 = (1/(m_R*c_R))/(1+K*x_e(1));                                  % df1/du
+B1 = (1/(m_R*c_R))/(1+K*x_e(1));                                % df1/du
 B2 = 0;                                                         % df2/du
 
 B = [B1; B2];                                                   % matrice 2x1
@@ -65,7 +63,7 @@ modello = ss(A, B, C, D);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Punto 2
 % Funzione di trasferimento G(s) tale che δY (s) = G(s)δU(s)
-G = tf(modello)
+G = tf(modello);
 
 % Poli di G(s)
 p = pole(G);
@@ -86,10 +84,77 @@ figure
 bode(G);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Punto 3
+% REGOLATORE
+% Design del regolatore statico
+
+% Parametri
+e_star = 0.001;         % errore a regime massimo
+W_star = 50;            % w(t) = W · 1(t) con W <= 50  
+D_star = 2;             % d(t) = D · 1(t) con D <= 2
+
+Mf_star = 40;          % margine di fase minimo imposto
+S_star = 18;            % sovraelongazione percentuale massima
+T_star = 0.3;           % tempo di assestamento alla ϵ% = 1% massimo (s)
+
+A_d = 60;               % attenuazione disturbo in uscita (dB)
+omega_d_min = 1e-20;        % limite inferiore range di pulsazioni di d(t)
+omega_d_max = 0.1;      % limite superiore range di pulsazioni di d(t)
+
+A_n = 40;               % attenuazione disturbo di misura (dB)
+omega_n_min = 1e3;        % limite inferiore range di pulsazioni di n(t)
+omega_n_max = 1e6;      % limite superiore range di pulsazioni di n(t)
+
+Mf_min = 100*abs(log(S_star/100))/sqrt(pi^2 + log(S_star/100)^2);   % Mf_min imposto da S_star
+Mf_star = max(Mf_min,Mf_star);                                      % Mf_star come massimo tra quello imposto dal progetto e quello imposto da S_star
+omega_c_min = 460/Mf_star/T_star;                                   % vincolo sulla omega_c minima dato da Mf_min e T_star
 
 
+% Guadagno statico minimo imposto dall'errore a regime
+mu_error = (W_star+D_star)/e_star;                  % guadagno statico minimo imposto da e_star
+mu_s_error = mu_error/abs(evalfr(G,0));             % (guadagno della R_s) = (guadagno minimo imposto da e_star)/(guadagno statico di G nell'origine)
 
+% Guadagno statico minimo imposto dal disturbo in uscita
+mu_dist = 10^(A_d/20);                              % guadagno statico minimo imposto dal disturbo -> da dB a forma lineare (formula inversa di 20log10())
+mu_s_dist = mu_dist/abs(evalfr(G,1j*omega_d_max));  % (guadagno della R_s) = (guadagno minimo imposto da d(t))/(guadagno statico nella pulsazione più critica -> dove l'ampiezza è minore)
 
+% Vediamo quale vincolo è più forte
+mu_s = max(mu_s_error, mu_s_dist);
+
+% Regolatore Statico
+R_s = mu_s;
+
+% Sistema esteso
+G_estesa = R_s*G;
+
+% solo per visualizzione, pulsazione minima e massima
+omega_plot_min = 1e-20;
+omega_plot_max = omega_n_max;
+
+% Mapping specifiche sul diagramma di Bode (modulo)
+figure;
+hold on;
+
+patch_d_x = [omega_d_min;omega_d_min;omega_d_max; omega_d_max];
+patch_d_y = [-200;A_d;A_d;-200];
+patch(patch_d_x,patch_d_y,'r','FaceAlpha',0.1);
+
+patch_n_x = [omega_n_min;omega_n_min;omega_n_max; omega_n_max];
+patch_n_y = [-A_n;200;200;-A_n];
+patch(patch_n_x,patch_n_y,'r','FaceAlpha',0.1);
+
+patch_omega_c_x = [omega_plot_min;omega_plot_min;omega_c_min; omega_c_min];
+patch_omega_c_y = [-200;0;0;-200];
+patch(patch_omega_c_x,patch_omega_c_y,'r','FaceAlpha',0.1);
+
+margin(G_estesa,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
+grid on; zoom on;
+
+% Mapping specifiche sul diagramma di Bode (fase)
+
+patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
+patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
+patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 
 
