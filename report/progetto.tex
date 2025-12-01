@@ -176,7 +176,7 @@ Tuttavia noi siamo interessati alla coppia di equilibrio che si ottiene fissando
 \end{align*}\\
 Consideriamo quindi solo la prima equazione e isoliamo $u_e$:\\
 \begin{align*}
-	u_e = h_RA_R(x_{2e}-x_{1e})(1+\kappa x_{1e})
+	u_e = h_RA_R(x_{1e}-x_{2e})(1+\kappa x_{1e})
 \end{align*}
 %
 dal quale otteniamo, sostituendo i parametri
@@ -185,7 +185,7 @@ dal quale otteniamo, sostituendo i parametri
 	x_e := \begin{bmatrix}
 		200 \text{ °C}\\
 		80 \text{ °C}
-	\end{bmatrix},  \quad u_e = \dots W.\label{eq:equilibirum_pair}
+	\end{bmatrix},  \quad u_e = 756\text{ W}.\label{eq:equilibirum_pair}
 \end{align}
 %
 Definiamo le variabili alle variazioni $\delta x$, $\delta u$ e $\delta y$ come 
@@ -241,15 +241,13 @@ In questa sezione, andiamo a calcolare la funzione di trasferimento $G(s)$ dall'
 G(s) = C \dfrac{adj(sI-A)}{det(sI-A)}B + D
 \end{align*}
 
-Procediamo per passi e calcoliamo prima il determinante di $sI-A$:
-
+Procediamo per passi e calcoliamo prima il determinante di $sI-A$:\\
 \begin{align*}
 	det(sI-A) = (s + \myalpha + \dfrac{u_e\kappa}{(m_Rc_R)(1+\kappa x_{1e})^2})(s + \mygamma + \myphi) - \dfrac{(h_RA_R)^2}{m_Am_Rc_Ac_R}
-\end{align*}
+\end{align*}\\
 
-
-
-poi la matrice aggiunta di $sI - A$. Visto che quest'ultima è una matrice $2x2$, vale la seguente:
+poi la matrice aggiunta di $sI - A$. 
+Visto che quest'ultima è una matrice $2x2$, vale la seguente:\\
 
 $$ adj\Big(\begin{bmatrix}
 	a & b\\
@@ -259,15 +257,14 @@ $$ adj\Big(\begin{bmatrix}
 	-c & a
 \end{bmatrix}$$
 
-e quindi: 
+e quindi:
 
 $$adj(sI-A) = \begin{bmatrix}
 	s + \mygamma + \myphi & \myalpha\\ \\
 	\myphi & s + \myalpha \dfrac{u_e\kappa}{(m_Rc_R)(1+\kappa x_{1e})^2}
-\end{bmatrix}$$
+\end{bmatrix}$$\\
 
-Mettendo tutto insieme abbiamo: 
-
+Mettendo tutto insieme abbiamo:\\ 
 \begin{align*}
 	G(s) = \dfrac{1}{det(sI-A)}
 	\begin{bmatrix} 0 & 1 \end{bmatrix}
@@ -280,13 +277,11 @@ Mettendo tutto insieme abbiamo:
 		0
 	\end{bmatrix}
 \end{align*}\\
-
 Infine, sostituendo i parametri e svolgendo i calcoli si ottiene la funzione di trasferimento del sistema:
 \begin{align}\label{eq:transfer_function}
 	\setlength{\fboxsep}{20pt}
 	\Aboxed{ G(s) = \dfrac{2.407 \cdot 10^-5}{s^2 + 1.968s + 8.152 \cdot 10^-3} }
-\end{align}
-
+\end{align}\\
 %
 Dunque il sistema linearizzato~\eqref{eq:linearized_system}
 è caratterizzato dalla funzione di trasferimento~\eqref{eq:transfer_function}
@@ -295,8 +290,7 @@ con \textbf{2 poli} e \textbf{nessuno zero}. I poli (indicati con $p_1$ e $p_2$)
 	p_1 &= -1.964 \\ 
 	p_2 &= -0.0042
 \end{align*}\\
-In Figura \dots mostriamo il corrispondente diagramma di Bode.
-
+In Figura \dots mostriamo il corrispondente diagramma di Bode.\\
 \dots
 
 \begin{figure}[h]
@@ -305,7 +299,6 @@ In Figura \dots mostriamo il corrispondente diagramma di Bode.
     \caption{Caption.}
     \label{fig:bode_diagram}
 \end{figure}
-
 \dots\\
 
 Inoltre, \dots
@@ -320,18 +313,40 @@ Inoltre, \dots
 \section{Mappatura specifiche del regolatore}
 \label{sec:specifications}
 
-Le specifiche da soddisfare sono
-\begin{itemize}
-	\item \textbf{Specifica 1:} Errore a regime $|e_\infty| \le e^* = 0.001$ in risposta ad un gradino
-	$w(t) = W \cdot 1(t)$ e $d(t) = D \cdot 1(t)$ con ampiezze $W \le 50$ e $D \le 2$ 
-	\item \textbf{Specifica 2:} Margine di fase $M_f \ge 40$° 
-	\item \textbf{Specifica 3:} Sovraelongazione percentuale massima del $18\%$, quindi $S\% \le 18\% $ 
-	\item \textbf{Specifica 4:} Il tempo di assestamento alla $\epsilon\% = 1\%$ deve essere inferiore al valore fissato: $T{a,\epsilon}=0.3s$.
-	\item \textbf{Specifica 5:} Il disturbo sull'uscita $d(t)$, con banda limitata nel range delle pulsazioni $[0, 0.1]$ deve essere abbattuto di almeno 60 dB
-	\item \textbf{Specifica 6:} Il rumore di misura $n(t)$, con banda limitata nel range delle pulsazioni $[10^3, 10^6]$ deve essere abbattuto di almeno 40 dB
-\end{itemize}
+Le specifiche da soddisfare sono le seguenti:\\ \\
+\textbf{Specifica 1:} Errore a regime $|e_\infty| \le e^* = 0.001$ in risposta ad un gradino
+$w(t) = W \cdot 1(t)$ e $d(t) = D \cdot 1(t)$ con ampiezze $W \le 50$ e $D \le 2$ \\
+
+Sappiamo che
+\begin{align*}
+	e_\infty &= \lim_{t \rightarrow \infty} e(t) = \lim_{s \rightarrow 0} sE(s) = \lim_{s \rightarrow 0} sS(s)(\dfrac{W}{s} + \dfrac{D}{s}) = (W + D) \lim_{s \rightarrow 0} S(s)
+\end{align*}
+
+Vista l'assenza di poli in $s=0$, il limite di $S(s)$ per $s \rightarrow 0$ vale $\frac{1}{1 + \mu}$, e quindi
+\begin{align*}
+	e_\infty = \frac{W+D}{1+\mu} \approx \frac{W+D}{\mu} \le e^*
+\end{align*} 
+
+e isolando $\mu$
+\begin{align*}
+	\mu = L(0) \ge \frac{D^* + W^*}{e^*} = 5.2 \cdot 10^3
+\end{align*}
+
+Abbiamo quindi ottenuto la prima condizione:
+\begin{align*}
+	\setlength{\fboxsep}{10pt}
+	\Aboxed{\mu \ge 5.2 \cdot 10^3}
+\end{align*}
+\\
+\textbf{Specifica 2:} Margine di fase $M_f \ge 40$° \\ \\
+\textbf{Specifica 3:} Sovraelongazione percentuale massima del $18\%$, quindi $S\% \le 18\% $ \\ \\
+\textbf{Specifica 4:} Il tempo di assestamento alla $\epsilon\% = 1\%$ deve essere inferiore al valore fissato: $T{a,\epsilon}=0.3s$.\\ \\
+\textbf{Specifica 5:} Il disturbo sull'uscita $d(t)$, con banda limitata nel range delle pulsazioni $[0, 0.1]$ deve essere abbattuto di almeno 60 dB\\ \\
+\textbf{Specifica 6:} Il rumore di misura $n(t)$, con banda limitata nel range delle pulsazioni $[10^3, 10^6]$ deve essere abbattuto di almeno 40 dB\\ \\
 %
-Andiamo ad effettuare la mappatura punto per punto le specifiche richieste. \dots  
+Andiamo ad effettuare la mappatura punto per punto le specifiche richieste:
+
+
 
 Pertanto, in Figura \dots, mostriamo il diagramma di Bode della funzione di trasferimento $G(s)$ con le zone proibite emerse dalla mappatura delle specifiche.
 
