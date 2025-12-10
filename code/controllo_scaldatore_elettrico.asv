@@ -180,7 +180,21 @@ s = tf('s');
 
 R_d_anticipatrice = (1+tau_anticipatrice*s)/(1+alpha_tau_anticipatrice*s); 
 
-R = R_d_anticipatrice*R_s;
+% Rete ritardatrice
+omega_c_sa
+% formule di inversione per la rete ritardatrice
+tau_ritardatrice = (cosd(phi_star) - M_star)/(omega_c_star*sind(phi_star));
+alpha_tau_ritardatrice = (M_star-cosd(phi_star))/(omega_c_star*sind(phi_star));
+
+% controllo che tau e alpha_tau siano < 0
+if min(tau_ritardatrice,alpha_tau_ritardatrice) < 0
+    fprintf('Valori negativi\n');
+    return;
+end
+
+R_d_ritardatrice = (1+alpha_tau_ritardatrice*s)/(1+tau_ritardatrice*s);
+
+R = R_d_ritardatrice * R_d_anticipatrice*R_s;
 L = R*G;
 
 figure;
