@@ -160,7 +160,7 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 % Parametri
 epsilon = 5;        % margine di sicurezza della fase
 
-omega_c_star = 200;                                                                    %  valore arbitrario > omega_c_min
+omega_c_star = 100;                                                                    %  valore arbitrario > omega_c_min
 M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));
 Mf_star = Mf_star + epsilon;                                                           % margine rispetto a Mf_min
 phi_star = Mf_star - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
@@ -177,25 +177,16 @@ if min(tau_anticipatrice,alpha_tau_anticipatrice) < 0
 end
 
 s = tf('s');
-
 R_d_anticipatrice = (1+tau_anticipatrice*s)/(1+alpha_tau_anticipatrice*s); 
 
+G_estesa_anticipata = R_d_anticipatrice*G_estesa;
 % Rete ritardatrice
-omega_c_sa
-% formule di inversione per la rete ritardatrice
-tau_ritardatrice = (cosd(phi_star) - M_star)/(omega_c_star*sind(phi_star));
-alpha_tau_ritardatrice = (M_star-cosd(phi_star))/(omega_c_star*sind(phi_star));
+omega_c_star_new = 50;
+alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
 
-% controllo che tau e alpha_tau siano < 0
-if min(tau_ritardatrice,alpha_tau_ritardatrice) < 0
-    fprintf('Valori negativi\n');
-    return;
-end
 
-R_d_ritardatrice = (1+alpha_tau_ritardatrice*s)/(1+tau_ritardatrice*s);
-
-R = R_d_ritardatrice * R_d_anticipatrice*R_s;
-L = R*G;
+R_anticipata = R_d_anticipatrice*R_s;
+L_anticipata = R_anticipata*G;
 
 figure;
 hold on;
@@ -212,7 +203,7 @@ patch_omega_c_x = [omega_plot_min;omega_plot_min;omega_c_min; omega_c_min];
 patch_omega_c_y = [-200;0;0;-200];
 patch(patch_omega_c_x,patch_omega_c_y,'r','FaceAlpha',0.1);
 
-margin(L,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
+margin(L_anticipata,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
 grid on; zoom on;
 
 % Mapping specifiche sul diagramma di Bode (fase)
@@ -222,7 +213,33 @@ patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 
+R = R_d_ri*R_d_anticipatrice*R_s;
+L_anticipata = R_anticipata*G;
 
+
+figure;
+hold on;
+
+patch_d_x = [omega_d_min;omega_d_min;omega_d_max; omega_d_max];
+patch_d_y = [-200;A_d;A_d;-200];
+patch(patch_d_x,patch_d_y,'r','FaceAlpha',0.1);
+
+patch_n_x = [omega_n_min;omega_n_min;omega_n_max; omega_n_max];
+patch_n_y = [-A_n;200;200;-A_n];
+patch(patch_n_x,patch_n_y,'r','FaceAlpha',0.1);
+
+patch_omega_c_x = [omega_plot_min;omega_plot_min;omega_c_min; omega_c_min];
+patch_omega_c_y = [-200;0;0;-200];
+patch(patch_omega_c_x,patch_omega_c_y,'r','FaceAlpha',0.1);
+
+margin(L_anticipata,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
+grid on; zoom on;
+
+% Mapping specifiche sul diagramma di Bode (fase)
+
+patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
+patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
+patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 
 
