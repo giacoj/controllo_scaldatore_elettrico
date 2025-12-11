@@ -179,17 +179,16 @@ end
 s = tf('s');
 R_d_anticipatrice = (1+tau_anticipatrice*s)/(1+alpha_tau_anticipatrice*s); 
 
-G_estesa_anticipata = R_d_anticipatrice*G_estesa;
 R_anticipata = R_d_anticipatrice*R_s;
 L_anticipata = R_anticipata*G;
+G_estesa_anticipata = R_d_anticipatrice*G_estesa;
 
 % Rete ritardatrice
-omega_c_star_new = 50;
+omega_c_star_new = 60;
 alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
-tau_ritardatrice = 0.5;
+tau_ritardatrice = 1000;
 
 R_d_ritardatrice = (1 + alpha_ritardatrice*tau_ritardatrice*s)/(1 + tau_ritardatrice*s);
-
 
 figure;
 hold on;
@@ -244,6 +243,71 @@ patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
 patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Punto 4
+
+%% Check prestazioni in anello chiuso
+
+% Funzione di sensitività complementare
+F = L/(1+L);
+
+% Ingresso di riferimento
+W = 50;
+figure
+T_simulation = 2*T_star;
+[y_step,t_step] = step(W*F, T_simulation);
+plot(t_step,y_step,'b');
+grid on, zoom on, hold on;
+
+LV = evalfr(W*F,0);
+
+% vincolo sovraelongazione
+patch([0,T_simulation,T_simulation,0],[LV*(1+S_star/100),LV*(1+S_star/100),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
+
+% vincolo tempo di assestamento all'1%
+patch([T_star,T_simulation,T_simulation,T_star],[LV*(1-0.01),LV*(1-0.01),0,0],'g','FaceAlpha',0.1,'EdgeAlpha',0.5);
+patch([T_star,T_simulation,T_simulation,T_star],[LV*(1+0.01),LV*(1+0.01),LV*2,LV*2],'g','FaceAlpha',0.1,'EdgeAlpha',0.1);
+
+Legend_step = ["Risposta al gradino"; "Vincolo sovraelongazione"; "Vincolo tempo di assestamento"];
+legend(Legend_step);
+
+%% Check disturbo in uscita
+
+% Funzione di sensitività
+S = 1/(1+L);
+
+omega_d = 0.02;
+t = 0:1e-2:2e2;
+% Disturbo:
+d = zeros(size(t));
+for k = 1:4
+    d = d + 0.8 * sin(omega_d * k * t); 
+end
+
+figure
+y_d = lsim(S,d,t);
+hold on, grid on, zoom on
+plot(t,d,'m')
+plot(t,y_d,'b')
+grid on
+legend('d(t)','y_d(t)')
+
+%% Check disturbo di misura
+
+omega_n = 10^5;
+t = 0:1e-5:2*1e-3;
+% Rumore ad alta frequenza
+n = zeros(size(t));
+for k = 1:4
+    n = n + 0.5 * sin(omega_n * k * t); 
+end
+figure
+y_n = lsim(-F,n,t);
+hold on, grid on, zoom on
+plot(t,n,'m')
+plot(t,y_n,'b')
+grid on
+legend('n(t)','y_n(t')
 
 
 

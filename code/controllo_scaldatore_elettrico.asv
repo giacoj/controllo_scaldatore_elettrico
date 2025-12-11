@@ -128,7 +128,7 @@ R_s = mu_s;
 G_estesa = R_s*G;
 
 % solo per visualizzione, pulsazione minima e massima
-omega_plot_min = 1e-6;         % idealmente 0, concretamente 10^-6, altrimenti matlab non riuscirebbe ad arrivare a -infinito
+omega_plot_min = 1e-4;         % idealmente 0, concretamente 10^-4, altrimenti matlab non riuscirebbe ad arrivare a -infinito
 omega_plot_max = omega_n_max;
 
 % Mapping specifiche sul diagramma di Bode (modulo)
@@ -179,14 +179,16 @@ end
 s = tf('s');
 R_d_anticipatrice = (1+tau_anticipatrice*s)/(1+alpha_tau_anticipatrice*s); 
 
-G_estesa_anticipata = R_d_anticipatrice*G_estesa;
-% Rete ritardatrice
-omega_c_star_new = 50;
-alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
-
-
 R_anticipata = R_d_anticipatrice*R_s;
 L_anticipata = R_anticipata*G;
+G_estesa_anticipata = R_d_anticipatrice*G_estesa;
+
+% Rete ritardatrice
+omega_c_star_new = 60;
+alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
+tau_ritardatrice = 1000;
+
+R_d_ritardatrice = (1 + alpha_ritardatrice*tau_ritardatrice*s)/(1 + tau_ritardatrice*s);
 
 figure;
 hold on;
@@ -213,8 +215,8 @@ patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 
-R = R_d_ri*R_d_anticipatrice*R_s;
-L_anticipata = R_anticipata*G;
+R = R_d_ritardatrice*R_d_anticipatrice*R_s;
+L = G * R;
 
 
 figure;
@@ -232,7 +234,7 @@ patch_omega_c_x = [omega_plot_min;omega_plot_min;omega_c_min; omega_c_min];
 patch_omega_c_y = [-200;0;0;-200];
 patch(patch_omega_c_x,patch_omega_c_y,'r','FaceAlpha',0.1);
 
-margin(L_anticipata,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
+margin(L,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
 grid on; zoom on;
 
 % Mapping specifiche sul diagramma di Bode (fase)
@@ -240,6 +242,51 @@ grid on; zoom on;
 patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
 patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Punto 4
+
+%% Check prestazioni in anello chiuso
+
+% Funzione di sensitività complementare
+F = L/(1+L);
+
+% Ingresso di riferimento
+W = 50;
+figure
+T_simulation = 2*T_star;
+[y_step,t_step] = step(W*F, T_simulation);
+plot(t_step,y_step,'b');
+grid on, zoom on, hold on;
+
+LV = evalfr(W*F,0);
+
+% vincolo sovraelongazione
+patch([0,T_simulation,T_simulation,0],[LV*(1+S_star/100),LV*(1+S_star/100),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
+
+% vincolo tempo di assestamento all'1%
+patch([T_star,T_simulation,T_simulation,T_star],[LV*(1-0.01),LV*(1-0.01),0,0],'g','FaceAlpha',0.1,'EdgeAlpha',0.5);
+patch([T_star,T_simulation,T_simulation,T_star],[LV*(1+0.01),LV*(1+0.01),LV*2,LV*2],'g','FaceAlpha',0.1,'EdgeAlpha',0.1);
+
+Legend_step = ["Risposta al gradino"; "Vincolo sovraelongazione"; "Vincolo tempo di assestamento"];
+legend(Legend_step);
+
+%% Check disturbo in uscita
+
+% Funzione di sensitività
+SS = 1/(1+LL);
+
+% Disturbo:
+omega_d = 0.02;
+d = zeros(size(t));
+for k = 1:4
+    d = d + 0.8 * sin(0.02 * k * t); 
+end
+
+figure
+
+
+
 
 
 
