@@ -93,7 +93,7 @@ e_star = 0.001;         % errore a regime massimo
 W_star = 50;            % w(t) = W · 1(t) con W <= 50  
 D_star = 2;             % d(t) = D · 1(t) con D <= 2
 
-Mf_star = 40;           % margine di fase minimo imposto
+Mf_star_iniziale = 40;           % margine di fase minimo imposto
 S_star = 18;            % sovraelongazione percentuale massima
 T_star = 0.3;           % tempo di assestamento alla ϵ% = 1% massimo (s)
 
@@ -106,7 +106,7 @@ omega_n_min = 1e3;      % limite inferiore range di pulsazioni di n(t)
 omega_n_max = 1e6;      % limite superiore range di pulsazioni di n(t)
 
 Mf_min = 100*abs(log(S_star/100))/sqrt(pi^2 + log(S_star/100)^2);   % Mf_min imposto da S_star
-Mf_star = max(Mf_min,Mf_star);                                      % Mf_star come massimo tra quello imposto dal progetto e quello imposto da S_star
+Mf_star = max(Mf_min,Mf_star_iniziale);                             % Mf_star come massimo tra quello imposto dal progetto e quello imposto da S_star
 omega_c_min = 460/Mf_star/T_star;                                   % vincolo sulla omega_c minima dato da Mf_min e T_star
 
 
@@ -161,10 +161,9 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 % Parametri
 epsilon = 10;        % margine di sicurezza della fase
 
-omega_c_star = 50;                                                                    %  valore arbitrario > omega_c_min
-M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));
-Mf_star = Mf_star + epsilon;                                                           % margine rispetto a Mf_min
-phi_star = Mf_star - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
+omega_c_star = 50;                                     %  valore arbitrario > omega_c_min
+M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
+phi_star = Mf_star + epsilon - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
 
 % Rete anticipatrice -- formule di inversione
 tau_anticipatrice       = (M_star - cosd(phi_star))/(omega_c_star*sind(phi_star));
@@ -176,21 +175,12 @@ if min(tau_anticipatrice,alpha_tau_anticipatrice) < 0
     return;
 end
 
+
 s = tf('s');
 R_d_anticipatrice = (1+tau_anticipatrice*s)/(1+alpha_tau_anticipatrice*s); 
 
-R_anticipata = R_d_anticipatrice*R_s;
-L_anticipata = R_anticipata*G;
-G_estesa_anticipata = R_d_anticipatrice*G_estesa;
+L_anticipata = R_d_anticipatrice*R_s*G;
 
-% Rete ritardatrice
-%omega_c_star_new = 60;
-%alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
-tau_ritardatrice = 10^-3;
-
-%R_d_ritardatrice = (1 + alpha_ritardatrice*tau_ritardatrice*s)/(1 + tau_ritardatrice*s);
-%R_d_ritardatrice = 1/(1 + tau_ritardatrice*s);
-R_d_ritardatrice = 1;
 
 figure;
 hold on;
@@ -216,9 +206,8 @@ patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
 patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
-%%
 
-R = R_d_ritardatrice*R_d_anticipatrice*R_s;
+R = R_d_anticipatrice*R_s;
 L = G * R;
 
 
