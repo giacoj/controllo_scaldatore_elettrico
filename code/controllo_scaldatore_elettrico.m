@@ -18,8 +18,8 @@ K   = 2e-3;          %  coefficiente di variazione della resistenza con la tempe
 T_R_e   = 200;       %  temperatura del riscaldatore di equilibrio [C°];
 T_out_e = 80;        %  temperatura dell'aria in uscita dal riscaldatore di equilibrio [C°]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Punto 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Punto 1
 % Funzione dello stato del sistema
 x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K*x(1));
                 m_A_dot/m_A*T_in-(m_A_dot/m_A+(h_R*A_R)/(m_A*c_A))*x(2)+(h_R*A_R)/(m_A*c_A)*x(1)];
@@ -61,7 +61,7 @@ D = 0;                                                          % dh/du
 modello = ss(A, B, C, D);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Punto 2
+%% Punto 2
 % Funzione di trasferimento G(s) tale che δY (s) = G(s)δU(s)
 G = tf(modello);
 
@@ -84,7 +84,7 @@ figure
 bode(G);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Punto 3
+%% Punto 3
 % REGOLATORE
 % Design del regolatore statico
 
@@ -93,7 +93,7 @@ e_star = 0.001;         % errore a regime massimo
 W_star = 50;            % w(t) = W · 1(t) con W <= 50  
 D_star = 2;             % d(t) = D · 1(t) con D <= 2
 
-Mf_star = 40;           % margine di fase minimo imposto
+Mf_star_iniziale = 40;           % margine di fase minimo imposto
 S_star = 18;            % sovraelongazione percentuale massima
 T_star = 0.3;           % tempo di assestamento alla ϵ% = 1% massimo (s)
 
@@ -106,7 +106,7 @@ omega_n_min = 1e3;      % limite inferiore range di pulsazioni di n(t)
 omega_n_max = 1e6;      % limite superiore range di pulsazioni di n(t)
 
 Mf_min = 100*abs(log(S_star/100))/sqrt(pi^2 + log(S_star/100)^2);   % Mf_min imposto da S_star
-Mf_star = max(Mf_min,Mf_star);                                      % Mf_star come massimo tra quello imposto dal progetto e quello imposto da S_star
+Mf_star = max(Mf_min,Mf_star_iniziale);                             % Mf_star come massimo tra quello imposto dal progetto e quello imposto da S_star
 omega_c_min = 460/Mf_star/T_star;                                   % vincolo sulla omega_c minima dato da Mf_min e T_star
 
 
@@ -121,20 +121,22 @@ mu_s_dist = mu_dist/abs(evalfr(G,1j*omega_d_max));  % (guadagno della R_s) = (gu
 % Vediamo quale vincolo è più forte
 mu_s = max(mu_s_error, mu_s_dist);
 
-% Regolatore Statico
+% Regolatore statico
 R_s = mu_s;
 
 % Sistema esteso
 G_estesa = R_s*G;
 
 % solo per visualizzione, pulsazione minima e massima
-omega_plot_min = 1e-4;         % idealmente 0, concretamente 10^-4, altrimenti matlab non riuscirebbe ad arrivare a -infinito
+omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare
+                                % fino a -infinito
 omega_plot_max = omega_n_max;
 
-% Mapping specifiche sul diagramma di Bode (modulo)
+
 figure;
 hold on;
 
+% Mapping specifiche sul diagramma di Bode (modulo)
 patch_d_x = [omega_d_min;omega_d_min;omega_d_max; omega_d_max];
 patch_d_y = [-200;A_d;A_d;-200];
 patch(patch_d_x,patch_d_y,'r','FaceAlpha',0.1);
@@ -151,26 +153,23 @@ margin(G_estesa,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode 
 grid on; zoom on;
 
 % Mapping specifiche sul diagramma di Bode (fase)
-
 patch_Mf_x = [omega_c_min; omega_c_min; omega_n_min; omega_n_min];
 patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
-% Design del regolatore dinamico
+%% Design del regolatore dinamico
 % Parametri
-epsilon = 5;        % margine di sicurezza della fase
+epsilon = 10;        % margine di sicurezza della fase
 
-omega_c_star = 100;                                                                    %  valore arbitrario > omega_c_min
-M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));
-Mf_star = Mf_star + epsilon;                                                           % margine rispetto a Mf_min
-phi_star = Mf_star - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
+omega_c_star = 50;                                     %  valore arbitrario > omega_c_min
+M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
+phi_star = Mf_star + epsilon - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
 
-% Rete anticipatrice
-% formule di inversione per la rete anticipatrice
+% Rete anticipatrice -- formule di inversione
 tau_anticipatrice       = (M_star - cosd(phi_star))/(omega_c_star*sind(phi_star));
 alpha_tau_anticipatrice = (cosd(phi_star) - 1/M_star)/(omega_c_star*sind(phi_star));
 
-% controllo che tau e alpha_tau siano < 0
+
 if min(tau_anticipatrice,alpha_tau_anticipatrice) < 0
     fprintf('Valori negativi\n');
     return;
@@ -184,11 +183,13 @@ L_anticipata = R_anticipata*G;
 G_estesa_anticipata = R_d_anticipatrice*G_estesa;
 
 % Rete ritardatrice
-omega_c_star_new = 60;
-alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
-tau_ritardatrice = 1000;
+%omega_c_star_new = 60;
+%alpha_ritardatrice = 1/abs(evalfr(G_estesa_anticipata,1j*omega_c_star_new));
+tau_ritardatrice = 10^-3;
 
-R_d_ritardatrice = (1 + alpha_ritardatrice*tau_ritardatrice*s)/(1 + tau_ritardatrice*s);
+%R_d_ritardatrice = (1 + alpha_ritardatrice*tau_ritardatrice*s)/(1 + tau_ritardatrice*s);
+%R_d_ritardatrice = 1/(1 + tau_ritardatrice*s);
+R_d_ritardatrice = 1;
 
 figure;
 hold on;
@@ -244,9 +245,9 @@ patch_Mf_y = [-270; -180+Mf_star; -180+Mf_star; -270];
 patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Punto 4
+%% Punto 4
 
-%% Check prestazioni in anello chiuso
+% Check prestazioni in anello chiuso
 
 % Funzione di sensitività complementare
 F = L/(1+L);
