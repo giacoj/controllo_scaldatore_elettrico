@@ -124,9 +124,18 @@ Pertanto, andiamo individuare lo stato $x$, l'ingresso $u$ e l'uscita $y$ del si
 Coerentemente con questa scelta, ricaviamo dal sistema~\eqref{eq:system} la seguente espressione per le funzioni $f$ ed $h$
 %
 \begin{align*}
-	f(x,u) &:= \dots.
+	f(x,u) &=  \begin{bmatrix}
+		f_1 (x,u)
+		\\
+		f_2 (x,u)
+	\end{bmatrix}  
+    := 
+    \begin{bmatrix}
+		\myalpha x_2 - \myalpha x_1 + \dfrac{u}{(m_Rc_R)(1+\kappa x_1)} \\ \\
+		\mygamma T_{in} - (\mygamma + \myphi) x_2 + \myphi x_1
+	\end{bmatrix} 
 	\\
-	h(x,u) &:= \dots.
+	h(x,u) &:= x_{2}
 \end{align*}
 %
 Una volta calcolate $f$ ed $h$ esprimiamo~\eqref{eq:system} nella seguente forma di stato
@@ -152,34 +161,22 @@ Per trovare la coppia di equilibrio $(x_e, u_e)$ di~\eqref{eq:our_system_state_f
 %
 \begin{align}
 	\begin{cases}
-		f_1(x, u) = 0\\
-		f_2(x, u) = 0
+		f_1(x_e, u_e) = 0\\
+		f_2(x_e, u_e) = 0
 	\end{cases}
-	=
+	\implies
 	\begin{cases}
 		\myalpha ( x_{2e} - x_{1e}) + \dfrac{u_e}{(m_Rc_R)(1 + \kappa x_{1e})} = 0\\ \\
 		\mygamma T_{in} - (\mygamma + \myphi) x_{2e} + \myphi x_{1e} = 0
 	\end{cases}
 \end{align}\\
-Abbiamo tre parametri $(x_{1e}, x_{2e}, u_e)$ per due equazioni, quindi ci sono un numero infinito di coppie di equilibrio.
-Tuttavia noi siamo interessati alla coppia di equilibrio che si ottiene fissando $x = x_e$ tale che:
-\begin{align*}
-	x_e = \begin{bmatrix}
-		x_{1e}\\
-		x_{2e}
-	\end{bmatrix}
-	=
-	\begin{bmatrix}
-		T_{R,e}\\
-		T_{out,e}
-	\end{bmatrix}
-\end{align*}\\
-Consideriamo quindi solo la prima equazione e isoliamo $u_e$:\\
+In particolare sono noti gli equilibri per lo stato $(x_{1e}, x_{2e})$ e dobbiamo ricavare $u_e$ in relazione ad essi.
+Possiamo ottenere il risultato dalla prima equazione isolando $u_e$. Procedendo con i calcoli otteniamo:\\
 \begin{align*}
 	u_e = h_RA_R(x_{1e}-x_{2e})(1+\kappa x_{1e})
 \end{align*}
 %
-dal quale otteniamo, sostituendo i parametri
+Infine, sostituendo i parametri, la coppia di equilibrio risulta:
 %
 \begin{align}
 	x_e := \begin{bmatrix}
@@ -191,11 +188,11 @@ dal quale otteniamo, sostituendo i parametri
 Definiamo le variabili alle variazioni $\delta x$, $\delta u$ e $\delta y$ come 
 %
 \begin{align*}
-	\delta x &= \dots, 
+	\delta x \approx x(t) -x_e, 
 	\quad
-	\delta u = \dots, 
+	\delta u \approx u(t) -u_e, 
 	\quad
-	\delta y = \dots.
+	\delta y \approx y(t) -y_e.
 \end{align*}
 %
 L'evoluzione del sistema espressa nelle variabili alle variazioni pu\`o essere approssimativamente descritta mediante il seguente sistema lineare
@@ -209,25 +206,63 @@ L'evoluzione del sistema espressa nelle variabili alle variazioni pu\`o essere a
 \end{subequations}
 %
 dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
+
 %
 \renewcommand{\arraystretch}{2}
 \begin{subequations}\label{eq:matrices}
 \begin{align}
-	A &= \begin{bmatrix}
+	A &= 
+    \begin{bmatrix}
+    \left.\dfrac{\partial f_1(x,u)}{\partial x_1}\right|_{x_e,u_e} &
+    \left.\dfrac{\partial f_1(x,u)}{\partial x_2}\right|_{x_e,u_e} \\
+    \left.\dfrac{\partial f_2(x,u)}{\partial x_1}\right|_{x_e,u_e} &
+    \left.\dfrac{\partial f_2(x,u)}{\partial x_2}\right|_{x_e,u_e}
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
 		-(\myalpha + \mybeta \dfrac{u_e\kappa}{(1+\kappa x_{1e})^2}) & \myalpha \\
 		\myphi & - \myphi - \mygamma
-	\end{bmatrix}
+	\end{bmatrix}\\
+    &=
+    \begin{bmatrix}
+    -1.05 & -0.45 \\
+    -0.35 & -0.95
+    \end{bmatrix}
 	\\ \\
-	B &= \begin{bmatrix}
+	B &=
+    \begin{bmatrix}
+    \left.\dfrac{\partial f_1(x,u)}{\partial u}\right|_{x_e,u_e} \\
+    \left.\dfrac{\partial f_2(x,u)}{\partial u}\right|_{x_e,u_e}
+\end{bmatrix}
+    =
+    \begin{bmatrix}
 		\dfrac{1}{(m_Rc_R)(1+\kappa x_{1e})}\\
 		0
 	\end{bmatrix}
+    =
+    \begin{bmatrix}
+    2.407\cdot 10^{-5} \\
+    0
+    \end{bmatrix},
 	\\ \\
-	C &= \begin{bmatrix}
-		0 & 1
-	\end{bmatrix}
+	C &=
+    \begin{bmatrix}
+    \left.\dfrac{\partial h(x,u)}{\partial x_1}\right|_{x_e,u_e} &
+    \left.\dfrac{\partial h(x,u)}{\partial x_2}\right|_{x_e,u_e}
+    \end{bmatrix}
+=
+\begin{bmatrix}
+0 & 1
+\end{bmatrix}
 	\\ \\
-	D &= 0.
+	D &=
+    \begin{bmatrix}
+    \left.\dfrac{\partial h(x,u)}{\partial u}\right|_{x_e,u_e}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0
+    \end{bmatrix}
 \end{align}
 \end{subequations}
 \renewcommand{\arraystretch}{1}
@@ -290,25 +325,44 @@ con \textbf{2 poli} e \textbf{nessuno zero}. I poli (indicati con $p_1$ e $p_2$)
 	p_1 &= -1.964 \\ 
 	p_2 &= -0.0042
 \end{align*}\\
-In Figura \dots mostriamo il corrispondente diagramma di Bode.\\
-\dots
+In Figura 1 mostriamo il corrispondente diagramma di Bode.\\
 
 \begin{figure}[h]
     \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
+    \includegraphics [width=0.3\textwidth]{G_diagram.pdf} 
+    \caption{Diagramma di Bode del sistema.}
     \label{fig:bode_diagram}
 \end{figure}
-\dots\\
+\section*{Analisi in Frequenza}
 
-Inoltre, \dots
+Consideriamo la funzione di trasferimentoa:
+\begin{equation}
+    G(s) = \frac{2.407 \cdot 10^{-5}}{s^2 + 1.968s + 8.152 \cdot 10^{-3}}
+\end{equation}
 
-\dots
+Per passare al dominio della frequenza, sostituiamo $s$ con $j\omega$:
+\begin{equation}
+    G(j\omega) = \frac{2.407 \cdot 10^{-5}}{(j\omega)^2 + 1.968(j\omega) + 8.152 \cdot 10^{-3}}
+\end{equation}\\
+Notiamo che ci troviamo nel caso di un sistema del secondo ordine (due poli a parte reale negativa). 
+Di conseguenza, il guadagno statico $G(0)$ si mantiene costante fino a quando la frequenza $\omega$ raggiunge il modulo del polo più vicino all'origine, ovvero $|p_2|=0.0042$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
+Dopo che anche il secondo polo si manifesta ad $\omega = 1.964$ rad/s avremo una pendenza di $-40$ db/decade.\\
+Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180°$.\\
 
-\dots
-
-\dots
-
+Ora portiamo la funzione di trasferimento nella forma di Bode:
+\begin{equation}
+   G(j\omega) = \frac{0.00295}{1 + 2j(10.9)\frac{\omega}{0.0903} - \frac{\omega^2}{0.0903^2}}
+\end{equation}
+Confrontiamo il denominatore con la forma canonica $s^2 + 2\xi\omega_n s + \omega_n^2$ per ricavare i parametri caratteristici.
+La pulsazione naturale risulta:
+   \begin{equation}
+       \omega_n = 0.0903 \, \text{rad/s}
+    \end{equation}
+Il coefficiente di smorzamento risulta:
+    \begin{equation}
+      \xi = 10.9
+    \end{equation}
+Essendo $\xi>1$, il sistema è fortemente smorzato e il picco di risonanza non è rilevante.
 
 \section{Mappatura specifiche del regolatore}
 \label{sec:specifications}
