@@ -85,7 +85,6 @@ bode(G);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Punto 3
-% REGOLATORE
 % Design del regolatore statico
 
 % Parametri
@@ -159,9 +158,9 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 %% Design del regolatore dinamico
 % Parametri
-epsilon = 10;        % margine di sicurezza della fase
+epsilon = 5;        % margine di sicurezza della fase
 
-omega_c_star = 50;                                     %  valore arbitrario > omega_c_min
+omega_c_star = 70;                                     %  valore arbitrario > omega_c_min
 M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
 phi_star = Mf_star + epsilon - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
 
