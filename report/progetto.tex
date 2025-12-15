@@ -335,7 +335,7 @@ In Figura 1 mostriamo il corrispondente diagramma di Bode.\\
 \end{figure}
 \section*{Analisi in Frequenza}
 
-Consideriamo la funzione di trasferimentoa:
+Consideriamo la funzione di trasferimento:
 \begin{equation}
     G(s) = \frac{2.407 \cdot 10^{-5}}{s^2 + 1.968s + 8.152 \cdot 10^{-3}}
 \end{equation}
@@ -344,10 +344,10 @@ Per passare al dominio della frequenza, sostituiamo $s$ con $j\omega$:
 \begin{equation}
     G(j\omega) = \frac{2.407 \cdot 10^{-5}}{(j\omega)^2 + 1.968(j\omega) + 8.152 \cdot 10^{-3}}
 \end{equation}\\
-Notiamo che ci troviamo nel caso di un sistema del secondo ordine (due poli a parte reale negativa). 
-Di conseguenza, il guadagno statico $G(0)$ si mantiene costante fino a quando la frequenza $\omega$ raggiunge il modulo del polo più vicino all'origine, ovvero $|p_2|=0.0042$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
+Notiamo che ci troviamo nel caso di un sistema del secondo ordine (due poli a parte reale negativa). Di conseguenza il sistema si comporta come un filtro passa-basso reale. \\
+Il guadagno statico si mantiene costante fino a quando la frequenza raggiunge il modulo del polo più vicino all'origine, ovvero $|p_2|=0.0042$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
 Dopo che anche il secondo polo si manifesta ad $\omega = 1.964$ rad/s avremo una pendenza di $-40$ db/decade.\\
-Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180°$.\\
+Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180$°.\\
 
 Ora portiamo la funzione di trasferimento nella forma di Bode:
 \begin{equation}
@@ -393,32 +393,50 @@ Abbiamo quindi ottenuto la prima condizione:
 \end{align*}
 \\
 \textbf{Specifica 2:} Margine di fase $M_f \ge 40$° \\ \\
-\textbf{Specifica 3:} Sovraelongazione percentuale massima del $18\%$, quindi $S\% \le 18\% $ \\ \\
-\textbf{Specifica 4:} Il tempo di assestamento alla $\epsilon\% = 1\%$ deve essere inferiore al valore fissato: $T{a,\epsilon}=0.3s$.\\ \\
-\textbf{Specifica 5:} Il disturbo sull'uscita $d(t)$, con banda limitata nel range delle pulsazioni $[0, 0.1]$ deve essere abbattuto di almeno 60 dB\\ \\
-\textbf{Specifica 6:} Il rumore di misura $n(t)$, con banda limitata nel range delle pulsazioni $[10^3, 10^6]$ deve essere abbattuto di almeno 40 dB\\ \\
+\textbf{Specifica 3:} Sovraelongazione percentuale massima del $18\%$, quindi $S\% \le 18\% $ \\
+
+Sappiamo che $S$ \% $\le S^{\star}$ equivale a richiedere $\xi \ge\xi^{\star}$, con $S^{\star} = e^{\frac{-\pi\xi^{\star}}{\sqrt{1-(\xi^{\star})^2}}}$. Procedendo con i calcoli si ottiene:
+\begin{align*}
+    \xi^{\star} =0.479133 \approx 0.48
+\end{align*} 
+Essendo $M_f \ge 100\xi^{\star}$, allora si ottiene la condizione  
+\begin{align*}
+	\setlength{\fboxsep}{10pt}
+	\Aboxed{M_f \ge 48\%}
+\end{align*}
+La quale, dovendo scegliere la più restrittiva tra la specifica 2 e 3, risulta la condizione da imporre sul margine di fase. 
+\\ \\
+\textbf{Specifica 4:} Il tempo di assestamento alla $\epsilon\% = 1\%$ deve essere inferiore al valore fissato: $T{a,\epsilon}=0.3s$.\\
+
+Ricordando che $T_{a,1} = 4.6T$ e che $T=\frac{1}{\xi\omega_c}$, allora si ottiene che
+\begin{align*}
+    \omega_c\ge\frac{460}{T^{\star}M_f^{\star}} \approx 32\text{ rad/s}
+\end{align*}
+Possiamo concludere che 
+\begin{align*}
+	\setlength{\fboxsep}{10pt}
+	\Aboxed{\omega_{c,min}= 32 {\text{ rad/s}}}
+\end{align*}
+\\
+\textbf{Specifica 5:} Il disturbo sull'uscita $d(t)$, con banda limitata nel range delle pulsazioni $[0, 0.1]$ deve essere abbattuto di almeno 60 dB; ciò equivale a: 
+\begin{align*}
+    |L(j\omega)|_{\text{dB}} \ge60 {\text{ dB \quad con } \omega\in[\omega_{d,min},\omega_{d,max}]=[0,0.1]}
+\end{align*}\\ \\
+\textbf{Specifica 6:} Il rumore di misura $n(t)$, con banda limitata nel range delle pulsazioni $[10^3, 10^6]$ deve essere abbattuto di almeno 40 dB; ciò equivale a:
+\begin{align*}
+    |L(j\omega)|_{\text{dB}} \le-40 {\text{dB\quad con }\omega\in[\omega_{n,min},\omega_{n,max}]=[10^3,10^6]}
+\end{align*}
+\\ \\
 %
-Andiamo ad effettuare la mappatura punto per punto le specifiche richieste:
-
-
-
-Pertanto, in Figura \dots, mostriamo il diagramma di Bode della funzione di trasferimento $G(s)$ con le zone proibite emerse dalla mappatura delle specifiche.
-
-\dots
+Pertanto, in Figura 2 mostriamo il diagramma di Bode della funzione di trasferimento $G(s)$ con le zone proibite emerse dalla mappatura delle specifiche.\\
 
 \begin{figure}[h]
     \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
-    \label{fig:bode_diagram}
+    \includegraphics [width=0.3\textwidth]{mappatura.pdf} 
+    \caption{Mappatura delle richieste}
+    \label{fig:mappatura}
 \end{figure}
-
-\dots
-
-Si può notare che \dots
-
-\dots
-
+Si può notare dal diagramma delle ampiezze che il guadagno statico è insufficiente. E' compito del regolatore alzarlo per soddisfare la specifica 1.
 \section{Sintesi del regolatore statico}
 \label{sec:static_regulator}
 
@@ -427,8 +445,6 @@ In questa sezione progettiamo il regolatore statico $R_s(s)$ partendo dalle anal
 \dots
 
 Dunque, definiamo la funzione estesa $G_e(s) = R_s(s)G(s)$ e, in Figura \dots, mostriamo il suo diagramma di Bode per verificare se e quali zone proibite vengono attraversate.
-
-\dots
 
 \begin{figure}[h]
     \centering
