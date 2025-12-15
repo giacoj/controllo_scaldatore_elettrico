@@ -20,6 +20,11 @@ T_out_e = 80;        %  temperatura dell'aria in uscita dal riscaldatore di equi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Punto 1
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
 % Funzione dello stato del sistema
 x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K*x(1));
                 m_A_dot/m_A*T_in-(m_A_dot/m_A+(h_R*A_R)/(m_A*c_A))*x(2)+(h_R*A_R)/(m_A*c_A)*x(1)];
@@ -27,6 +32,7 @@ x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K
 % Funzione dell'uscita del sistema
 y = @(t,x)[0; x(2)];
 
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
 % Coppia di equilibrio
 x_e = [T_R_e; T_out_e];
 u_e = (h_R*A_R)*(x_e(1) - x_e(2))*(1 + K*x_e(1));
@@ -127,8 +133,17 @@ R_s = mu_s;
 G_estesa = R_s*G;
 
 % solo per visualizzione, pulsazione minima e massima
+<<<<<<< HEAD
+<<<<<<< HEAD
+omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare fino a -infinito
+=======
 omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare
                                 % fino a -infinito
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
+=======
+omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare
+                                % fino a -infinito
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
 omega_plot_max = omega_n_max;
 
 
@@ -158,12 +173,24 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 %% Design del regolatore dinamico
 % Parametri
-epsilon = 5;        % margine di sicurezza della fase
+epsilon = 8;                                            % margine di sicurezza della fase
+omega_c_star = 70;                                     %  valore arbitrario > omega_c_min
+M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      
+phi_star = Mf_star + epsilon - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
 omega_c_star = 70;                                     %  valore arbitrario > omega_c_min
 M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
 phi_star = Mf_star + epsilon - 180 - rad2deg(angle(evalfr(G_estesa,1j*omega_c_star))) ;
 
+<<<<<<< HEAD
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
+=======
+>>>>>>> 9aec07e549abf6098cc9f9b915dccc076a0a036d
 % Rete anticipatrice -- formule di inversione
 tau_anticipatrice       = (M_star - cosd(phi_star))/(omega_c_star*sind(phi_star));
 alpha_tau_anticipatrice = (cosd(phi_star) - 1/M_star)/(omega_c_star*sind(phi_star));
@@ -197,7 +224,7 @@ patch_omega_c_x = [omega_plot_min;omega_plot_min;omega_c_min; omega_c_min];
 patch_omega_c_y = [-200;0;0;-200];
 patch(patch_omega_c_x,patch_omega_c_y,'r','FaceAlpha',0.1);
 
-margin(L,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della G_estesa
+margin(L,{omega_plot_min,omega_plot_max});           % Diagrammi di Bode della L
 grid on; zoom on;
 
 % Mapping specifiche sul diagramma di Bode (fase)
@@ -222,7 +249,7 @@ T_simulation = 2*T_star;
 plot(t_step,y_step,'b');
 grid on, zoom on, hold on;
 
-LV = evalfr(W*F,0);
+LV = evalfr(W*F,0); % LV è il valore a cui la risposta y_step si assesterà nel tempo
 
 % vincolo sovraelongazione
 patch([0,T_simulation,T_simulation,0],[LV*(1+S_star/100),LV*(1+S_star/100),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
@@ -272,6 +299,16 @@ plot(t,y_n,'b')
 grid on
 legend('n(t)','y_n(t')
 
+%% Animazione
+out = sim("simulatore_non_lineare");
 
+t  = out.x.Time;
 
+% 1. Estrae X1: Primo componente (indice 1), tutta la seconda dimensione (che è 1), 
+%    e tutti i campioni temporali (terza dimensione).
+x1 = squeeze(out.x.Data(1, :, :)); 
+
+% 2. Estrae X2: Secondo componente (indice 2), tutta la seconda dimensione (che è 1), 
+%    e tutti i campioni temporali (terza dimensione).
+x2 = squeeze(out.x.Data(2, :, :));
 
