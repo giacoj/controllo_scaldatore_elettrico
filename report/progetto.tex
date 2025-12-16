@@ -440,60 +440,72 @@ Si può notare dal diagramma delle ampiezze che il guadagno statico è insuffici
 \section{Sintesi del regolatore statico}
 \label{sec:static_regulator}
 
-In questa sezione progettiamo il regolatore statico $R_s(s)$ partendo dalle analisi fatte in sezione~\ref{sec:specifications}.
+In questa sezione progettiamo il regolatore statico $R_s(s)$ partendo dalle analisi fatte in sezione~\ref{sec:specifications}.\\
 
-\dots
+La specifica 1 sull'errore a regime impone di avere un guadagno statico pari o superiore a $\mu^{\star}_e=5.2\cdot10^4$. 
+Di conseguenza, il guadagno del regolatore statico deve essere tale da imporre un guadagno complessivo almeno pari a $\mu^{\star}_e$. 
+Ne consegue che il guadagno di $R_s(s)$ deve essere pari a:
+\begin{align*}
+    \mu_e= \frac{\mu^{\star}_e}{|G(0)|} = \frac{5.2\cdot10^4}{3\cdot10^{-3}}= 1.7283\cdot10^7
+\end{align*}\\
 
-Dunque, definiamo la funzione estesa $G_e(s) = R_s(s)G(s)$ e, in Figura \dots, mostriamo il suo diagramma di Bode per verificare se e quali zone proibite vengono attraversate.
+La specifica 5 sul disturbo in uscita impone di avere 
+\begin{align*}
+    \min_{[\omega_{d,min},\omega_{d,max}]}|L(j\omega)|_{\text{dB}}=|L(\omega_{d,min})|_{\text{dB}}=|G(\omega_{d,min})|_{\text{dB}} \ge60{\text{dB}}=\mu^{\star}_d
+\end{align*}
+Passando dai decibel a una forma lineare otteniamo:
+\begin{align*}
+    \mu^{\star}_d=10^{\frac{60}{20}}=10^3
+\end{align*}
+Di conseguenza, il guadagno del regolatore statico deve essere tale da imporre un guadagno complessivo almeno pari a $\mu^{\star}_d$, che è pari a:
+\begin{align*}
+    \mu_d= \frac{\mu^{\star}_d}{|G(\omega_{d,min})|} = \frac{10^3}{1.223\cdot10^{-4}}= 8.1767\cdot10^6
+\end{align*}\\
 
+In definitiva, dobbiamo imporre che il guadagno statico di $R_s(s)$ sia:
+\begin{align*}
+    \mu= \max\{\mu_e, \mu_d\} = \mu_e=1.7283\cdot10^7
+\end{align*}\\
+Non dovendo soddisfare altri requisiti, termina qui il progetto del regolatore statico, la cui espressione è semplicemente:
+\begin{align*}
+    \setlength{\fboxsep}{10pt}
+    \Aboxed{R_s(s)=\mu}
+\end{align*}\\
+
+Dunque, definiamo la funzione estesa $G_e(s) = R_s(s)G(s)$ e, in Figura 3, mostriamo il suo diagramma di Bode per verificare se e quali zone proibite vengono attraversate.\\
 \begin{figure}[h]
     \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
-    \label{fig:bode_diagram}
+    \includegraphics [width=0.3\textwidth]{G_estesa.pdf} 
+    \caption{Funzione di trasferimento estesa}
+    \label{fig:mappatura}
 \end{figure}
-
-\dots
- 
-Da Figura \dots, emerge \dots\\
-
-\dots\\
-
-Inoltre, possiamo notare che \dots
-
-\dots
-
-\dots
-
-\dots
-
+\\Dalla Figura 3, emerge che nel diagramma di ampiezza la funzione estesa interseca la zona proibita corrispondente alla specifica 4 sulla frequenza critica minima, ossia la frequenza di attraversamento a $0$ dB è inferiore a $\omega_{c,min}$.\\
+Inoltre possiamo notare dal diagramma di fase che nell'intervallo di pulsazioni ammissibili per la pulsazione di attraversamento $\omega_c$ non esistono pulsazioni in cui la fase rispetta il vincolo sul margine di fase, relativo alle specifiche 2 e 3.
 
 \section{Sintesi del regolatore dinamico}
 
-In questa sezione, progettiamo il regolatore dinamico $R_d(s)$. 
-%
-Dalle analisi fatte in Sezione~\ref{sec:static_regulator}, notiamo di essere nello Scenario di tipo \dots. Dunque, progettiamo $R_d(s)$ riccorrendo a \dots
-
-
-In Figura \dots, mostriamo il diagramma di Bode della funzione d'anello $L(s) = R_d(s) G_e(s)$
+In questa sezione, progettiamo il regolatore dinamico $R_d(s)$.\\
+Dalle analisi fatte in Sezione~\ref{sec:static_regulator}, notiamo di essere nello Scenario di tipo B. Dunque, progettiamo $R_d(s)$ riccorrendo a una rete anticipatrice, ossia una rete nella forma:
+\begin{align*}
+    R_d(s) =\frac{1+\tau s}{1+\alpha\tau s}\qquad0<\alpha<1
+\end{align*}\\
+In particolare, applichiamo le formule di inversione per ottenere i parametri $\tau$ e $\alpha\tau$, imponendo la frequenza di attraversamento come $\omega_c^{\star}=70\space$ rad/s. Inoltre, inseriamo un margine di sicurezza per la fase $\varepsilon=8$. Chiamiamo $M^{\star}>1$ l'amplificazione della rete anticipatrice a $\omega_c^{\star}$ e $0<\varphi^{\star}<\frac{\pi}{2}$ lo sfasasmento a tale pulsazione. Allora bisogna che sia:
+\begin{align*}
+    M^{\star} =\frac{1}{|G_e(j\omega_c^{\star})|}\qquad\varphi^{\star}=M_f^{\star}-[180\degree+\arg\{G_e(j\omega_c^{\star})\}]+\varepsilon
+\end{align*}\\
+Quindi, tramite le formule di inversione:
+\begin{align*}
+    \tau =\frac{M^{\star}-\cos\varphi^{\star}}{\omega_c^{\star}\sin\varphi^{\star}}=0.197 \qquad \alpha\tau =\frac{\cos\varphi^{\star}-\frac{1}{M^{\star}}}{\omega_c^{\star}\sin\varphi^{\star}}=8.8\cdot10^{-3}
+\end{align*}\\
+In Figura 4 mostriamo il diagramma di Bode della funzione d'anello $L(s) = R_d(s) G_e(s)$.
 
 \begin{figure}[h]
     \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
-    \label{fig:bode_diagram_L}
+    \includegraphics [width=0.3\textwidth]{L_anello.pdf} 
+    \caption{Funzione d'anello $L(s)$}
+    \label{fig:mappatura}
 \end{figure}
-
-\dots
-
-Possiamo notare che \dots
-
-\dots
-
-\dots
-
-\dots
-
+Possiamo notare che tutte le specifiche sono rispettate e di conseguenza una rete anticipatrice è sufficiente per il progetto del regolatore dinamico.
 \section{Test sul sistema linearizzato}
 
 In questa sezione, testiamo l'efficacia del controllore progettato sul sistema linearizzato con \dots
