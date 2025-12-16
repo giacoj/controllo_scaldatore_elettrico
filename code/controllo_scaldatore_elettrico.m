@@ -158,7 +158,7 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 %% Design del regolatore dinamico
 % Parametri
-epsilon = 5;        % margine di sicurezza della fase
+epsilon = 8;        % margine di sicurezza della fase
 
 omega_c_star = 70;                                     %  valore arbitrario > omega_c_min
 M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
@@ -271,7 +271,3 @@ plot(t,n,'m')
 plot(t,y_n,'b')
 grid on
 legend('n(t)','y_n(t')
-
-
-
-
