@@ -181,8 +181,8 @@ Infine, sostituendo i parametri, la coppia di equilibrio risulta:
 \begin{align}
 	x_e := \begin{bmatrix}
 		200 \text{ °C}\\
-		80 \text{ °C}
-	\end{bmatrix},  \quad u_e = 756\text{ W}.\label{eq:equilibirum_pair}
+		28.8136 \text{ °C}
+	\end{bmatrix},  \quad u_e = 1.0785 \cdot 10^3 \text{ W}.\label{eq:equilibirum_pair}
 \end{align}
 %
 Definiamo le variabili alle variazioni $\delta x$, $\delta u$ e $\delta y$ come 
@@ -225,8 +225,8 @@ dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
 	\end{bmatrix}\\
     &=
     \begin{bmatrix}
-    -1.05 & -0.45 \\
-    -0.35 & -0.95
+    -0.044 & -0.0035 \\
+    -0.0428 & -1.9640
     \end{bmatrix}
 	\\ \\
 	B &=
@@ -241,7 +241,7 @@ dove le matrici $A$, $B$, $C$ e $D$ vengono calcolate come
 	\end{bmatrix}
     =
     \begin{bmatrix}
-    2.407\cdot 10^{-5} \\
+    0.5624\cdot 10^{-3} \\
     0
     \end{bmatrix},
 	\\ \\
@@ -315,15 +315,15 @@ Mettendo tutto insieme abbiamo:\\
 Infine, sostituendo i parametri e svolgendo i calcoli si ottiene la funzione di trasferimento del sistema:
 \begin{align}\label{eq:transfer_function}
 	\setlength{\fboxsep}{20pt}
-	\Aboxed{ G(s) = \dfrac{2.407 \cdot 10^-5}{s^2 + 1.968s + 8.152 \cdot 10^-3} }
+	\Aboxed{ G(s) = \dfrac{2.407 \cdot 10^-5}{s^2 + 1.968s + 8.509 \cdot 10^-3} }
 \end{align}\\
 %
 Dunque il sistema linearizzato~\eqref{eq:linearized_system}
 è caratterizzato dalla funzione di trasferimento~\eqref{eq:transfer_function}
 con \textbf{2 poli} e \textbf{nessuno zero}. I poli (indicati con $p_1$ e $p_2$) sono i seguenti: 
 \begin{align*}
-	p_1 &= -1.964 \\ 
-	p_2 &= -0.0042
+	p_1 &= -1.9641 \\ 
+	p_2 &= -0.0043
 \end{align*}\\
 In Figura 1 mostriamo il corrispondente diagramma di Bode.\\
 
@@ -337,30 +337,30 @@ In Figura 1 mostriamo il corrispondente diagramma di Bode.\\
 
 Consideriamo la funzione di trasferimento:
 \begin{equation}
-    G(s) = \frac{2.407 \cdot 10^{-5}}{s^2 + 1.968s + 8.152 \cdot 10^{-3}}
+    G(s) = \frac{2.407 \cdot 10^{-5}}{s^2 + 1.968s + 8.509 \cdot 10^{-3}}
 \end{equation}
 
 Per passare al dominio della frequenza, sostituiamo $s$ con $j\omega$:
 \begin{equation}
-    G(j\omega) = \frac{2.407 \cdot 10^{-5}}{(j\omega)^2 + 1.968(j\omega) + 8.152 \cdot 10^{-3}}
+    G(j\omega) = \frac{2.407 \cdot 10^{-5}}{(j\omega)^2 + 1.968(j\omega) + 8.509 \cdot 10^{-3}}
 \end{equation}\\
 Notiamo che ci troviamo nel caso di un sistema del secondo ordine (due poli a parte reale negativa). Di conseguenza il sistema si comporta come un filtro passa-basso reale. \\
-Il guadagno statico si mantiene costante fino a quando la frequenza raggiunge il modulo del polo più vicino all'origine, ovvero $|p_2|=0.0042$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
-Dopo che anche il secondo polo si manifesta ad $\omega = 1.964$ rad/s avremo una pendenza di $-40$ db/decade.\\
+Il guadagno statico si mantiene costante fino a quando la frequenza raggiunge il modulo del polo più vicino all'origine, ovvero $\omega = 0.0043$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
+Dopo che anche il secondo polo si manifesta ad $\omega = 1.9641$ rad/s avremo una pendenza di $-40$ db/decade.\\
 Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180$°.\\
 
 Ora portiamo la funzione di trasferimento nella forma di Bode:
 \begin{equation}
-   G(j\omega) = \frac{0.00295}{1 + 2j(10.9)\frac{\omega}{0.0903} - \frac{\omega^2}{0.0903^2}}
+   G(j\omega) = \frac{0.002829}{1 + 2j(10.66)\frac{\omega}{0.0922} - \frac{\omega^2}{0.0922^2}}
 \end{equation}
 Confrontiamo il denominatore con la forma canonica $s^2 + 2\xi\omega_n s + \omega_n^2$ per ricavare i parametri caratteristici.
 La pulsazione naturale risulta:
    \begin{equation}
-       \omega_n = 0.0903 \, \text{rad/s}
+       \omega_n = 0.0922 \, \text{rad/s}
     \end{equation}
 Il coefficiente di smorzamento risulta:
     \begin{equation}
-      \xi = 10.9
+      \xi = 10.66
     \end{equation}
 Essendo $\xi>1$, il sistema è fortemente smorzato e il picco di risonanza non è rilevante.
 
@@ -446,12 +446,12 @@ La specifica 1 sull'errore a regime impone di avere un guadagno statico pari o s
 Di conseguenza, il guadagno del regolatore statico deve essere tale da imporre un guadagno complessivo almeno pari a $\mu^{\star}_e$. 
 Ne consegue che il guadagno di $R_s(s)$ deve essere pari a:
 \begin{align*}
-    \mu_e= \frac{\mu^{\star}_e}{|G(0)|} = \frac{5.2\cdot10^4}{3\cdot10^{-3}}= 1.7283\cdot10^7
+    \mu_e= \frac{\mu^{\star}_e}{|G(0)|} = \frac{5.2\cdot10^4}{2.8\cdot10^{-3}}= 1.8382\cdot10^7
 \end{align*}\\
 
 La specifica 5 sul disturbo in uscita impone di avere 
 \begin{align*}
-    \min_{[\omega_{d,min},\omega_{d,max}]}|L(j\omega)|_{\text{dB}}=|L(\omega_{d,min})|_{\text{dB}}=|G(\omega_{d,min})|_{\text{dB}} \ge60{\text{dB}}=\mu^{\star}_d
+    \min_{[\omega_{d,min},\omega_{d,max}]}|L(j\omega)|_{\text{dB}}=|L(\omega_{d,max})|_{\text{dB}}=|G(\omega_{d,max})|_{\text{dB}} \ge60{\text{dB}}=\mu^{\star}_d
 \end{align*}
 Passando dai decibel a una forma lineare otteniamo:
 \begin{align*}
@@ -459,12 +459,12 @@ Passando dai decibel a una forma lineare otteniamo:
 \end{align*}
 Di conseguenza, il guadagno del regolatore statico deve essere tale da imporre un guadagno complessivo almeno pari a $\mu^{\star}_d$, che è pari a:
 \begin{align*}
-    \mu_d= \frac{\mu^{\star}_d}{|G(\omega_{d,min})|} = \frac{10^3}{1.223\cdot10^{-4}}= 8.1767\cdot10^6
+    \mu_d= \frac{\mu^{\star}_d}{|G(\omega_{d,max})|} = \frac{10^3}{1.1178\cdot10^{-4}}= 8.9461\cdot10^6
 \end{align*}\\
 
 In definitiva, dobbiamo imporre che il guadagno statico di $R_s(s)$ sia:
 \begin{align*}
-    \mu= \max\{\mu_e, \mu_d\} = \mu_e=1.7283\cdot10^7
+    \mu= \max\{\mu_e, \mu_d\} = \mu_e=1.8382\cdot10^7
 \end{align*}\\
 Non dovendo soddisfare altri requisiti, termina qui il progetto del regolatore statico, la cui espressione è semplicemente:
 \begin{align*}
@@ -475,7 +475,7 @@ Non dovendo soddisfare altri requisiti, termina qui il progetto del regolatore s
 Dunque, definiamo la funzione estesa $G_e(s) = R_s(s)G(s)$ e, in Figura 3, mostriamo il suo diagramma di Bode per verificare se e quali zone proibite vengono attraversate.\\
 \begin{figure}[h]
     \centering
-    %\includegraphics [width=0.3\textwidth]{../figs/G_estesa.pdf} 
+    \includegraphics [width=0.9\textwidth]{../figs/G_estesa.pdf} 
     \caption{Funzione di trasferimento estesa}
     \label{fig:mappatura}
 \end{figure}
@@ -495,7 +495,7 @@ In particolare, applichiamo le formule di inversione per ottenere i parametri $\
 \end{align*}\\
 Quindi, tramite le formule di inversione:
 \begin{align*}
-    \tau =\frac{M^{\star}-\cos\varphi^{\star}}{\omega_c^{\star}\sin\varphi^{\star}}=0.197 \qquad \alpha\tau =\frac{\cos\varphi^{\star}-\frac{1}{M^{\star}}}{\omega_c^{\star}\sin\varphi^{\star}}=8.8\cdot10^{-3}
+    \tau =\frac{M^{\star}-\cos\varphi^{\star}}{\omega_c^{\star}\sin\varphi^{\star}}=0.1846 \qquad \alpha\tau =\frac{\cos\varphi^{\star}-\frac{1}{M^{\star}}}{\omega_c^{\star}\sin\varphi^{\star}}=8.7\cdot10^{-3}
 \end{align*}\\
 In Figura 4 mostriamo il diagramma di Bode della funzione d'anello $L(s) = R_d(s) G_e(s)$.
 
