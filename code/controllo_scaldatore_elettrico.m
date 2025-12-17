@@ -16,16 +16,10 @@ m_A_dot = 0.2;       %  portata massica dell'aria [kg/s].
 T_in    = 25;        %  temperatura dell'aria in ingresso (costante) [C°]
 K   = 2e-3;          %  coefficiente di variazione della resistenza con la temperatura  [1/C°]
 T_R_e   = 200;       %  temperatura del riscaldatore di equilibrio [C°];
-T_out_e = 80;        %  temperatura dell'aria in uscita dal riscaldatore di equilibrio [C°]
+T_out_e = 28.8136;   %  temperatura dell'aria in uscita dal riscaldatore di equilibrio [C°]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Punto 1
-% Funzione dello stato del sistema
-x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K*x(1));
-                m_A_dot/m_A*T_in-(m_A_dot/m_A+(h_R*A_R)/(m_A*c_A))*x(2)+(h_R*A_R)/(m_A*c_A)*x(1)];
-
-% Funzione dell'uscita del sistema
-y = @(t,x)[0; x(2)];
 
 % Coppia di equilibrio
 x_e = [T_R_e; T_out_e];
@@ -222,7 +216,7 @@ T_simulation = 2*T_star;
 plot(t_step,y_step,'b');
 grid on, zoom on, hold on;
 
-LV = evalfr(W*F,0);
+LV = evalfr(W*F,0); % LV è il valore a cui la risposta y_step si assesterà nel tempo
 
 % vincolo sovraelongazione
 patch([0,T_simulation,T_simulation,0],[LV*(1+S_star/100),LV*(1+S_star/100),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
@@ -240,7 +234,7 @@ legend(Legend_step);
 S = 1/(1+L);
 
 omega_d = 0.02;
-t = 0:1e-2:2e2;
+t = 0:1e-2:6e2;
 % Disturbo:
 d = zeros(size(t));
 for k = 1:4
