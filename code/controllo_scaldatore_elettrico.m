@@ -16,7 +16,7 @@ m_A_dot = 0.2;       %  portata massica dell'aria [kg/s].
 T_in    = 25;        %  temperatura dell'aria in ingresso (costante) [C°]
 K   = 2e-3;          %  coefficiente di variazione della resistenza con la temperatura  [1/C°]
 T_R_e   = 200;       %  temperatura del riscaldatore di equilibrio [C°];
-T_out_e = 80;        %  temperatura dell'aria in uscita dal riscaldatore di equilibrio [C°]
+T_out_e = 28.8136;   %  temperatura dell'aria in uscita dal riscaldatore di equilibrio [C°]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Punto 1
