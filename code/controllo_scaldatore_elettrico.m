@@ -70,11 +70,11 @@ fprintf("Gli zeri di G:\n");
 disp(z);                   
 
 % Poli e zeri nel piano complesso
-figure
+figure("Name","Poli e Zeri");
 pzmap(G);
 
 % Diagrammi di Bode della G
-figure
+figure("Name","Diagramma di Bode di G(s)");
 bode(G);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,7 +126,7 @@ omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a r
 omega_plot_max = omega_n_max;
 
 
-figure;
+figure("Name","Diagramma di Bode di G_estesa(s)");
 hold on;
 
 % Mapping specifiche sul diagramma di Bode (modulo)
@@ -176,7 +176,7 @@ R = R_d_anticipatrice*R_s;
 L = G * R;
 
 
-figure;
+figure("Name","Diagramma di Bode di L(s)");
 hold on;
 
 patch_d_x = [omega_d_min;omega_d_min;omega_d_max; omega_d_max];
@@ -210,7 +210,7 @@ F = L/(1+L);
 
 % Ingresso di riferimento
 W = 50;
-figure
+figure("Name", "Risposta a gradino di F(s)");
 T_simulation = 2*T_star;
 [y_step,t_step] = step(W*F, T_simulation);
 plot(t_step,y_step,'b');
@@ -241,7 +241,7 @@ for k = 1:4
     d = d + 0.8 * sin(omega_d * k * t); 
 end
 
-figure
+figure("Name","Risposta a disturbo d(t)");
 y_d = lsim(S,d,t);
 hold on, grid on, zoom on
 plot(t,d,'m')
@@ -258,7 +258,7 @@ n = zeros(size(t));
 for k = 1:4
     n = n + 0.5 * sin(omega_n * k * t); 
 end
-figure
+figure("Name", "Risposta a disturbo n(t)");
 y_n = lsim(-F,n,t);
 hold on, grid on, zoom on
 plot(t,n,'m')
