@@ -20,12 +20,6 @@ T_out_e = 28.8136;   %  temperatura dell'aria in uscita dal riscaldatore di equi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Punto 1
-% Funzione dello stato del sistema
-x = @(t,x)[(h_R*A_R)/(m_R*c_R)*x(2)-(h_R*A_R)/(m_R*c_R)*x(1)+1/(m_R*c_R)*(uu/1+K*x(1));
-                m_A_dot/m_A*T_in-(m_A_dot/m_A+(h_R*A_R)/(m_A*c_A))*x(2)+(h_R*A_R)/(m_A*c_A)*x(1)];
-
-% Funzione dell'uscita del sistema
-y = @(t,x)[0; x(2)];
 
 % Coppia di equilibrio
 x_e = [T_R_e; T_out_e];
@@ -76,11 +70,11 @@ fprintf("Gli zeri di G:\n");
 disp(z);                   
 
 % Poli e zeri nel piano complesso
-figure
+figure("Name","Poli e Zeri");
 pzmap(G);
 
 % Diagrammi di Bode della G
-figure
+figure("Name","Diagramma di Bode di G(s)");
 bode(G);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,7 +126,7 @@ omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a r
 omega_plot_max = omega_n_max;
 
 
-figure;
+figure("Name","Diagramma di Bode di G_estesa(s)");
 hold on;
 
 % Mapping specifiche sul diagramma di Bode (modulo)
@@ -182,7 +176,7 @@ R = R_d_anticipatrice*R_s;
 L = G * R;
 
 
-figure;
+figure("Name","Diagramma di Bode di L(s)");
 hold on;
 
 patch_d_x = [omega_d_min;omega_d_min;omega_d_max; omega_d_max];
@@ -216,13 +210,13 @@ F = L/(1+L);
 
 % Ingresso di riferimento
 W = 50;
-figure
+figure("Name", "Risposta a gradino di F(s)");
 T_simulation = 2*T_star;
 [y_step,t_step] = step(W*F, T_simulation);
 plot(t_step,y_step,'b');
 grid on, zoom on, hold on;
 
-LV = evalfr(W*F,0);
+LV = evalfr(W*F,0); % LV è il valore a cui la risposta y_step si assesterà nel tempo
 
 % vincolo sovraelongazione
 patch([0,T_simulation,T_simulation,0],[LV*(1+S_star/100),LV*(1+S_star/100),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
@@ -240,14 +234,14 @@ legend(Legend_step);
 S = 1/(1+L);
 
 omega_d = 0.02;
-t = 0:1e-2:2e2;
+t = 0:1e-2:6e2;
 % Disturbo:
 d = zeros(size(t));
 for k = 1:4
     d = d + 0.8 * sin(omega_d * k * t); 
 end
 
-figure
+figure("Name","Risposta a disturbo d(t)");
 y_d = lsim(S,d,t);
 hold on, grid on, zoom on
 plot(t,d,'m')
@@ -264,7 +258,7 @@ n = zeros(size(t));
 for k = 1:4
     n = n + 0.5 * sin(omega_n * k * t); 
 end
-figure
+figure("Name", "Risposta a disturbo n(t)");
 y_n = lsim(-F,n,t);
 hold on, grid on, zoom on
 plot(t,n,'m')
