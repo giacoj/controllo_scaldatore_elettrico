@@ -347,23 +347,7 @@ Per passare al dominio della frequenza, sostituiamo $s$ con $j\omega$:
 Notiamo che ci troviamo nel caso di un sistema del secondo ordine (due poli a parte reale negativa). Di conseguenza il sistema si comporta come un filtro passa-basso reale. \\
 Il guadagno statico si mantiene costante fino a quando la frequenza raggiunge il modulo del polo più vicino all'origine, ovvero $\omega = 0.0043$ rad/s. A questa frequenza, il polo $p_2$ introduce una pendenza di $-20$ dB/decade nel diagramma delle ampiezze. 
 Dopo che anche il secondo polo si manifesta ad $\omega = 1.9641$ rad/s avremo una pendenza di $-40$ db/decade.\\
-Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180$°.\\
-
-Ora portiamo la funzione di trasferimento nella forma di Bode:
-\begin{equation}
-   G(j\omega) = \frac{0.002829}{1 + 2j(10.66)\frac{\omega}{0.0922} - \frac{\omega^2}{0.0922^2}}
-\end{equation}
-Confrontiamo il denominatore con la forma canonica $s^2 + 2\xi\omega_n s + \omega_n^2$ per ricavare i parametri caratteristici.
-La pulsazione naturale risulta:
-   \begin{equation}
-       \omega_n = 0.0922 \, \text{rad/s}
-    \end{equation}
-Il coefficiente di smorzamento risulta:
-    \begin{equation}
-      \xi = 10.66
-    \end{equation}
-Essendo $\xi>1$, il sistema è fortemente smorzato e il picco di risonanza non è rilevante.
-
+Per quanto riguarda il diagramma della fase, vediamo che presenta due curvature principali, in corrispondenza dei due poli, per poi assestarsi a frequenze alte su $-180$°.
 \section{Mappatura specifiche del regolatore}
 \label{sec:specifications}
 
@@ -508,41 +492,65 @@ In Figura 4 mostriamo il diagramma di Bode della funzione d'anello $L(s) = R_d(s
 Possiamo notare che tutte le specifiche sono rispettate e di conseguenza una rete anticipatrice è sufficiente per il progetto del regolatore dinamico.
 \section{Test sul sistema linearizzato}
 
-In questa sezione, testiamo l'efficacia del controllore progettato sul sistema linearizzato con \dots
+In questa sezione testiamo l'efficacia del controllore progettato sul sistema linearizzato con 
+\begin{align}
+w(t) = 50 \cdot 1(t) \qquad d(t) = 0.8 \sum_{k=1}^4 \text{sin}(0.02kt) \qquad n(t) = 0.5 \sum_{k=1}^4 \text{sin}(10^5kt). 
+\end{align}
 
-In Figura \dots, mostriamo lo schema a blocchi del sistema in anello chiuso. \dots
+Definiamo la funzione di sensitività $S(s)$ e di sensitività complementare $F(s)$ come
+\begin{align}
+	S(s) = \dfrac{1}{1+L(s)} \qquad F(s) = \dfrac{L(s)}{1+L(s)} 
+\end{align}
 
-\begin{figure}[h]
-    \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
-    \label{fig:bode_diagram_L}
-\end{figure}
-
-\dots
-
-Di seguito è riportato \dots in merito alla risposta del sistema a fronte di un ingresso \dots
-
-\begin{figure}[h]
-    \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
-    \label{fig:bode_diagram_L}
-\end{figure}
-
-\dots
-Si nota che \dots
-
-\dots
-
-Inoltre possiamo notare dalle seguenti figure \dots che i disturbi \dots 
+Inoltre grazie alla sovrapposizione degli effetti possiamo studiare la risposta ai segnali separatamente. Si ha infatti che
+\begin{align*}
+	Y(s) = Y_w(s) + Y_d(s) + Y_n(s)
+\end{align*}
+Iniziamo dal primo caso, cioè $Y_w(s)$. Trasformando secondo Laplace $w(t) = 50 \cdot 1(t)$ otteniamo $W(s) = \dfrac{50}{s}$.
+Di conseguenza 
+\begin{align*}
+	Y_w(s) = F(s) \cdot W(s) = \dfrac{50 \cdot F(s)}{s}
+\end{align*}
+In Figura 5 possiamo notare che vengono rispettate le specifiche 3 e 4 riguardo alla sovraelongazione percentuale e al tempo di assestamento.
 
 \begin{figure}[h]
     \centering
-    \fbox{\parbox{0.35\textwidth}{\vspace{1.9cm} Placeholder \vspace{1.9cm}}}
-    \caption{Caption.}
+    \includegraphics [width=0.9\textwidth]{../figs/risposta_gradino.pdf} 
+    \caption{Risposta del sistema al gradino $w(t)$}
     \label{fig:bode_diagram_L}
 \end{figure}
+
+Proseguiamo considerando $Y_d(s)$. La trasformata di Laplace del disturbo $d(t)$ vale
+\begin{align*}
+	D(s) = 0.8 \sum_{k=1}^4 \dfrac{\omega_d}{s^2 + \omega_d^2}
+\end{align*}
+
+con $\omega_d = 0.02k$. Allora otteniamo
+\begin{align*}
+	Y_d(s) = S(s) \cdot D(s) = 0.8 \cdot S(s) \sum_{k=1}^4 \dfrac{\omega_d}{s^2 + \omega_d^2}
+\end{align*}
+
+\begin{figure}[h]
+    \centering
+	\includegraphics [width=0.9\textwidth]{../figs/risposta_d.pdf} 
+	\caption{Caption.}
+    \label{fig:bode_diagram_L}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+	\includegraphics [width=0.9\textwidth]{../figs/risposta_n.pdf} 
+	\caption{Caption.}
+    \label{fig:bode_diagram_L}
+\end{figure}
+
+Come possiamo notare, in entrambi i casi l’uscita viene quasi totalmente abbattuta. Questo
+perch`e nella progettazione del nostro regolatore abbiamo sfruttato una caratteristica importante
+dei due disturbi $d(t)$ e $n(t)$: entrambi hanno le proprie bande limitate in opportuni range. $d(t)$
+infatti ha bande a bassa frequenza, mentre $n(t)$ lavora con bande ad alta frequenza.
+Il regolatore `e stato costruito in modo da avere $S(j\omega)$ $\ll$ $1$ a basse frequenze e $F(j\omega) \ll 1$ ad
+alte frequenza, provando in questo modo ad abbattere entrambi i disturbi. I risultati ottenuti
+sono quindi in accordo con le specifiche del problema.
 
 In seguito, \dots
 

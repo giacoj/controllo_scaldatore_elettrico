@@ -1,11 +1,14 @@
 # Fdb version 4
-["pdflatex"] 1766091522.09896 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766091523.32844 0
+["pdflatex"] 1766169939.53721 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766169940.66163 0
   "../figs/G_diagram.pdf" 1765982338.90917 20712 20e42b2eeb55fc204187ee1b6067873c ""
   "../figs/G_estesa.pdf" 1765982338.91017 29221 78ff98a26ce02b099dac5cc55078ecad ""
   "../figs/L_anello.pdf" 1765991690.2462 29387 89ebdd7cec53a5859dde3e83858c370e ""
   "../figs/mappatura.pdf" 1765982338.91217 27721 f8b8fb6a5ed59a3001d617d2f72a75d2 ""
+  "../figs/risposta_d.pdf" 1766167780.11422 127066 69a539b1d84106bdc9b5e30aab244424 ""
+  "../figs/risposta_gradino.pdf" 1766167004.55682 15142 bae1fe45ffc030e092b46cf09ffe4788 ""
+  "../figs/risposta_n.pdf" 1766167780.11422 14681 eea9653919cb5fd1ade9e7ff7f74bb4a ""
   "/etc/texmf/web2c/texmf.cnf" 1759752535.30532 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1766091521.74508 20914 6c1eed3a308e610610a73afbde24b0d5 ""
+  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1766169939.26625 21841 fef2bb494738e6066913754dabe25d2e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm" 1136768653 1536 12e8c510d3e158fdd0e9a42e75118bd9 ""
@@ -223,9 +226,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1763907094.92903 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1763907120 8214466 d82ca926959f88ddd4c2070af4adcba1 ""
-  "progetto.aux" 1766091523.18911 5115 48bafc2795da7a9f41a1b130b9daba27 "pdflatex"
-  "progetto.out" 1766091523.19111 2476 5774a2b65b3e9e7d377c5b3e777df3b0 "pdflatex"
-  "progetto.tex" 1766091521.74508 20914 6c1eed3a308e610610a73afbde24b0d5 ""
+  "progetto.aux" 1766169940.5393 5176 368324ac2626ca7a004718a9e64db845 "pdflatex"
+  "progetto.out" 1766169940.5403 2476 5774a2b65b3e9e7d377c5b3e777df3b0 "pdflatex"
+  "progetto.tex" 1766169939.26625 21841 fef2bb494738e6066913754dabe25d2e ""
   (generated)
   "progetto.aux"
   "progetto.log"
