@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.26)  26 DEC 2025 18:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.26)  26 DEC 2025 19:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -886,7 +886,7 @@ File: ../figs/mappatura.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../figs/mappatura.pdf  used on input line 419.
 (pdftex.def)             Requested size: 448.12788pt x 304.09045pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 427--428
@@ -914,7 +914,7 @@ File: ../figs/G_estesa.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../figs/G_estesa.pdf  used on input line 462.
 (pdftex.def)             Requested size: 448.12788pt x 299.9262pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [7 <../figs/mappatura.pdf>] [8 <../figs/G_estesa.pdf>]
 <../figs/L_anello.pdf, id=190, 512.91624pt x 343.2825pt>
@@ -935,58 +935,47 @@ Package pdftex.def Info: ../figs/risposta_d.pdf  used on input line 535.
 (pdftex.def)             Requested size: 448.12788pt x 288.6119pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <../figs/risposta_n.pdf, id=220, 489.83pt x 329.23pt>
 File: ../figs/risposta_n.pdf Graphic file (type pdf)
 <use ../figs/risposta_n.pdf>
-Package pdftex.def Info: ../figs/risposta_n.pdf  used on input line 542.
+Package pdftex.def Info: ../figs/risposta_n.pdf  used on input line 552.
 (pdftex.def)             Requested size: 448.12788pt x 301.20732pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10 <../figs/risposta_gradino.pdf>]
-<../figs/simulatore_non_lineare.pdf, id=241, 794.97pt x 614.295pt>
+[10 <../figs/risposta_gradino.pdf>] [11 <../figs/risposta_d.pdf> <../figs/risposta_n.pdf>]
+<../figs/simulatore_non_lineare.pdf, id=276, 794.97pt x 614.295pt>
 File: ../figs/simulatore_non_lineare.pdf Graphic file (type pdf)
 <use ../figs/simulatore_non_lineare.pdf>
-Package pdftex.def Info: ../figs/simulatore_non_lineare.pdf  used on input line 565.
+Package pdftex.def Info: ../figs/simulatore_non_lineare.pdf  used on input line 575.
 (pdftex.def)             Requested size: 448.12788pt x 346.28995pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../figs/risposta_non_linearizzato.pdf, id=242, 976.64874pt x 638.385pt>
+ [12 <../figs/simulatore_non_lineare.pdf>]
+<../figs/risposta_non_linearizzato.pdf, id=374, 976.64874pt x 638.385pt>
 File: ../figs/risposta_non_linearizzato.pdf Graphic file (type pdf)
 <use ../figs/risposta_non_linearizzato.pdf>
-Package pdftex.def Info: ../figs/risposta_non_linearizzato.pdf  used on input line 573.
+Package pdftex.def Info: ../figs/risposta_non_linearizzato.pdf  used on input line 583.
 (pdftex.def)             Requested size: 448.12788pt x 292.92033pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 577--580
+Underfull \hbox (badness 10000) in paragraph at lines 587--590
 
  []
 
-<../figs/Esplorazione_range_equilibri.pdf, id=243, 934.49126pt x 575.14874pt>
+<../figs/Esplorazione_range_equilibri.pdf, id=375, 934.49126pt x 575.14874pt>
 File: ../figs/Esplorazione_range_equilibri.pdf Graphic file (type pdf)
 <use ../figs/Esplorazione_range_equilibri.pdf>
-Package pdftex.def Info: ../figs/Esplorazione_range_equilibri.pdf  used on input line 583.
+Package pdftex.def Info: ../figs/Esplorazione_range_equilibri.pdf  used on input line 593.
 (pdftex.def)             Requested size: 448.12788pt x 275.81375pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <../figs/risposta_d.pdf>]
-<../figs/animazione.pdf, id=260, 937.5025pt x 576.1525pt>
+<../figs/animazione.pdf, id=376, 937.5025pt x 576.1525pt>
 File: ../figs/animazione.pdf Graphic file (type pdf)
 <use ../figs/animazione.pdf>
-Package pdftex.def Info: ../figs/animazione.pdf  used on input line 602.
+Package pdftex.def Info: ../figs/animazione.pdf  used on input line 612.
 (pdftex.def)             Requested size: 448.12788pt x 275.39838pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[12 <../figs/risposta_n.pdf>] [13 <../figs/simulatore_non_lineare.pdf>] [14 <../figs/risposta_non_linearizzato.pdf> <../figs/Esplorazione_range_equilibri.pdf>] [15 <../figs/animazione.pdf>] (progetto.aux)
+[13 <../figs/risposta_non_linearizzato.pdf>] [14 <../figs/Esplorazione_range_equilibri.pdf> <../figs/animazione.pdf>] [15] (progetto.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -1005,9 +994,9 @@ Here is how much of TeX's memory you used:
  49848 multiletter control sequences out of 15000+600000
  567528 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,87p,786b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,87p,786b,505s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\39392\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/39392/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on progetto.pdf (15 pages, 680177 bytes).
+Output written on progetto.pdf (15 pages, 680792 bytes).
 PDF statistics:
  527 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)

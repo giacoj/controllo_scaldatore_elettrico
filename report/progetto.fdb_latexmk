@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1766769215.46464 "c:/Users/39392/OneDrive/Desktop/progetto_controlli/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766769218.48059 0
+["pdflatex"] 1766773726.98432 "c:/Users/39392/OneDrive/Desktop/progetto_controlli/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766773728.38241 0
   "../figs/Esplorazione_range_equilibri.pdf" 1766602790 17361 2564c3ef03c5849f80b1eda478655eae ""
   "../figs/G_diagram.pdf" 1765991439 20712 ad928133836f6d5e1d222e5ce62b8e52 ""
   "../figs/G_estesa.pdf" 1765991439 29221 5ff21a0ea982139076a75cb74f8b24aa ""
@@ -227,10 +227,10 @@
   "C:/Users/39392/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1700599895 7500 db31c3d04f8bc9010e47a5efbbace9ff ""
   "C:/Users/39392/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/39392/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/Users/39392/OneDrive/Desktop/progetto_controlli/controllo_scaldatore_elettrico/report/progetto.tex" 1766769082 27099 ec0c27011e55f278be2e06ebf1582d1e ""
-  "progetto.aux" 1766769217 5073 b4b68b684e3f300e7d0e08a1776e9cff "pdflatex"
-  "progetto.out" 1766769217 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
-  "progetto.tex" 1766769082 27099 ec0c27011e55f278be2e06ebf1582d1e ""
+  "c:/Users/39392/OneDrive/Desktop/progetto_controlli/controllo_scaldatore_elettrico/report/progetto.tex" 1766773726 27420 07aa700bc0f29783531656b2ad25eee5 ""
+  "progetto.aux" 1766773728 5073 fa2331e5832eacb1a9aa4c757fa092fa "pdflatex"
+  "progetto.out" 1766773728 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
+  "progetto.tex" 1766773726 27420 07aa700bc0f29783531656b2ad25eee5 ""
   (generated)
   "progetto.aux"
   "progetto.log"
