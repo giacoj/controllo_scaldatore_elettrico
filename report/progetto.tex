@@ -490,6 +490,30 @@ In Figura 4 mostriamo il diagramma di Bode della funzione d'anello $L(s) = R_d(s
     \label{fig:mappatura}
 \end{figure}
 Possiamo notare che tutte le specifiche sono rispettate e di conseguenza una rete anticipatrice è sufficiente per il progetto del regolatore dinamico.
+
+\section*{Luogo delle radici}
+
+Avendo definito $L(s)$, possiamo fare alcune considerazioni sul luogo delle radici del sistema in anello aperto.
+Partiamo dalla sua espressione\\
+\begin{align}
+	L(s) = R_d(s)G_e(s) = 52000 \dfrac{1+ 0.1846s}{(1+0.00868s)(1+0.5091s)(1+230.8s)}
+\end{align}\\
+Osserviamo che ha uno zero ($m=1$) e tre poli ($n=3$) rispettivamente in
+\begin{align*}
+	z_1 = -5.417 \qquad p_1 = -115.24 \qquad p_2 = -1.964 \qquad p_3 = -0.0043
+\end{align*}
+Usando le regole di tracciamento, possiamo già trarre alcune
+conclusioni immediate sul luogo delle radici del sistema, e cioè:
+\begin{itemize}
+	\item Il luogo ha $3$ rami. Di questi, uno soltanto termina in uno zero, mentre gli altri due terminano all'infinito.
+	\item I soli punti dell'asse reale che appartengono al luogo sono quelli che lasciano alla propria destra un numero pari di singolarità, e cioè i punti compresi tra $p_1$ e $z_1$, e quelli tra $p_2$ e $p_3$ 
+	\item L'asintoto lungo il quale uno dei 3 rami tende all'infinito, interseca l'asse reale nel punto con ascissa pari a $$ x_a = \frac{1}{2}(-z_1+\sum_{i=1}^3 p_i) = -55.898 $$ ovvero tra $p_1$ e $z_1$.
+	\item In particolare, l'asintoto interseca l'asse reale formando un angolo pari a $$ \theta_{a,0} = \frac{\pi}{n-m} = \frac{\pi}{2} $$ quindi l'asse reale e l'asintoto sono perpendicolari.
+\end{itemize}
+
+A questo punto possiamo procedere nel tracciamento del luogo delle radici, seguendo le considerazioni fatte sopra.\\
+Il risultato finale è illustrato in Figura .
+
 \section{Test sul sistema linearizzato}
 
 In questa sezione testiamo l'efficacia del controllore progettato sul sistema linearizzato con 
@@ -603,8 +627,8 @@ Per valori inferirori, invece, il sistema torna a convergere, ma con tempi di as
 
 \section{Punto opzionale: animazione}
 
-Abbiamo realizzato in MATLAB un'animazione del sistema, graficando l'evoluzione lungo un periodo di %numero di secondi
-secondi di $T_{out}$ rispetto al riferimento a gradino con ampiezza circa 80 e l'evoluzione dell'errore di regolazione. In tale animazione mostriamo anche la potenza $P_E$ in ingresso al sistema.
+Abbiamo realizzato in MATLAB un'animazione del sistema, graficando l'evoluzione lungo un periodo di 10
+secondi di $T_{out}$ rispetto al riferimento a gradino con ampiezza 10 e l'evoluzione dell'errore di regolazione. In tale animazione mostriamo anche la potenza $P_E$ in ingresso al sistema.
 In Figura 11 abbiamo riportato uno screenshot dell'animazione. 
 
 \begin{figure}[h!]
