@@ -1,10 +1,12 @@
 # Fdb version 4
-["pdflatex"] 1766833267.07177 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766833268.08006 0
+["pdflatex"] 1766915488.87405 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766915489.64271 0
   "../figs/Esplorazione_range_equilibri.pdf" 1766824494.536 17361 2564c3ef03c5849f80b1eda478655eae ""
   "../figs/G_diagram.pdf" 1765982338.90917 20712 20e42b2eeb55fc204187ee1b6067873c ""
   "../figs/G_estesa.pdf" 1765982338.91017 29221 78ff98a26ce02b099dac5cc55078ecad ""
   "../figs/L_anello.pdf" 1765991690.2462 29387 89ebdd7cec53a5859dde3e83858c370e ""
   "../figs/animazione.pdf" 1766824494.537 42850 216df2ee3919735f7c62de9960b3f0e9 ""
+  "../figs/confronto_ampiezze.pdf" 1766824494.538 68769 848631902ab05303d77bf948defbec61 ""
+  "../figs/luogo_radici.pdf" 1766834844.34732 30122 8d767ca2a1901fed995a60ffd70b8ffd ""
   "../figs/mappatura.pdf" 1765982338.91217 27721 f8b8fb6a5ed59a3001d617d2f72a75d2 ""
   "../figs/risposta_d.pdf" 1766167780.11422 127066 69a539b1d84106bdc9b5e30aab244424 ""
   "../figs/risposta_gradino.pdf" 1766167004.55682 15142 bae1fe45ffc030e092b46cf09ffe4788 ""
@@ -12,7 +14,7 @@
   "../figs/risposta_non_linearizzato.pdf" 1766824494.539 53616 9a7e6c6111996c80659daeef335e96b4 ""
   "../figs/simulatore_non_lineare.pdf" 1766824494.54 65101 dfadb346d8bb07a18cc49ea8816130cb ""
   "/etc/texmf/web2c/texmf.cnf" 1759752535.30532 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1766833266.81244 28304 1300dbf349e65295dbd612772b9f7b4b ""
+  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1766915487.82005 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm" 1136768653 1536 12e8c510d3e158fdd0e9a42e75118bd9 ""
@@ -230,9 +232,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1763907094.92903 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1763907120 8214466 d82ca926959f88ddd4c2070af4adcba1 ""
-  "progetto.aux" 1766833267.96761 5075 183b029c8f1197d4717f1485f8babeda "pdflatex"
-  "progetto.out" 1766833267.96861 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
-  "progetto.tex" 1766833266.81244 28304 1300dbf349e65295dbd612772b9f7b4b ""
+  "progetto.aux" 1766915489.5591 6155 e22439b1b1352798634e17c526dcbda2 "pdflatex"
+  "progetto.out" 1766915489.5601 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
+  "progetto.tex" 1766915487.82005 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
   (generated)
   "progetto.aux"
   "progetto.log"
