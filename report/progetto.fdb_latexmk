@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1766915488.87405 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1766915489.64271 0
-  "../figs/Esplorazione_range_equilibri.pdf" 1766824494.536 17361 2564c3ef03c5849f80b1eda478655eae ""
+["pdflatex"] 1767090903.67866 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1767090905.07275 0
+  "../figs/Esplorazione_range_equilibri.pdf" 1767090873.77991 17448 69ea7587272dcfb8b889089f3041d9fb ""
   "../figs/G_diagram.pdf" 1765982338.90917 20712 20e42b2eeb55fc204187ee1b6067873c ""
   "../figs/G_estesa.pdf" 1765982338.91017 29221 78ff98a26ce02b099dac5cc55078ecad ""
   "../figs/L_anello.pdf" 1765991690.2462 29387 89ebdd7cec53a5859dde3e83858c370e ""
@@ -12,9 +12,9 @@
   "../figs/risposta_gradino.pdf" 1766167004.55682 15142 bae1fe45ffc030e092b46cf09ffe4788 ""
   "../figs/risposta_n.pdf" 1766167780.11422 14681 eea9653919cb5fd1ade9e7ff7f74bb4a ""
   "../figs/risposta_non_linearizzato.pdf" 1766824494.539 53616 9a7e6c6111996c80659daeef335e96b4 ""
-  "../figs/simulatore_non_lineare.pdf" 1766824494.54 65101 dfadb346d8bb07a18cc49ea8816130cb ""
+  "../figs/simulatore_non_lineare.pdf" 1767090873.78091 77834 2f3217aefef9a8b43a0bebef2f7e8e84 ""
   "/etc/texmf/web2c/texmf.cnf" 1759752535.30532 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1766915487.82005 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
+  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1767090903.2095 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm" 1136768653 1536 12e8c510d3e158fdd0e9a42e75118bd9 ""
@@ -232,9 +232,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1763907094.92903 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1763907120 8214466 d82ca926959f88ddd4c2070af4adcba1 ""
-  "progetto.aux" 1766915489.5591 6155 e22439b1b1352798634e17c526dcbda2 "pdflatex"
-  "progetto.out" 1766915489.5601 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
-  "progetto.tex" 1766915487.82005 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
+  "progetto.aux" 1767090904.90453 6155 e22439b1b1352798634e17c526dcbda2 "pdflatex"
+  "progetto.out" 1767090904.90553 2181 2f72ced7b40f056221c3c3452879260d "pdflatex"
+  "progetto.tex" 1767090903.2095 29308 f84d2b0c77aa41484e8ee74f3277f8ac ""
   (generated)
   "progetto.aux"
   "progetto.log"
