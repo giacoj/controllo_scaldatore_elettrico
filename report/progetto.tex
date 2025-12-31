@@ -469,7 +469,7 @@ Inoltre possiamo notare dal diagramma di fase che nell'intervallo di pulsazioni 
 \section{Sintesi del regolatore dinamico}
 
 In questa sezione, progettiamo il regolatore dinamico $R_d(s)$.\\
-Dalle analisi fatte in Sezione~\ref{sec:static_regulator}, notiamo di essere nello Scenario di tipo B. Dunque, progettiamo $R_d(s)$ riccorrendo a una rete anticipatrice, ossia una rete nella forma:
+Dalle analisi fatte in Sezione~\ref{sec:static_regulator}, notiamo di essere nello Scenario di tipo B. Dunque, progettiamo $R_d(s)$ ricorrendo a una rete anticipatrice, ossia una rete nella forma:
 \begin{align*}
     R_d(s) =\frac{1+\tau s}{1+\alpha\tau s}\qquad0<\alpha<1
 \end{align*}\\
@@ -611,7 +611,7 @@ In Figura \ref{fig:sistema_non_lineare}, mostriamo lo schema a blocchi del siste
 	\label{fig:sistema_non_lineare}
 \end{figure}
 
-In Figura \ref{fig:risposta_gradino_simulink} è riportata la risposta del sistema non linearizzato a fronte di un ingresso a gradino $w(t)$ con ampiezza 10. Possiamo notare facilmente che, a differenza del sistema linearizzato, non rispetta le specifiche del problema riguardanti il tempo di assestamento, evidenziando le complicazioni che nascono con un modello non linearizzato.
+In Figura \ref{fig:risposta_gradino_simulink} è riportata la risposta del sistema non linearizzato a fronte di un ingresso a gradino $w(t)$ con ampiezza 10. Possiamo notare facilmente che, a differenza del sistema linearizzato, non rispetta le specifiche del problema riguardanti il tempo di assestamento, evidenziando le complicazioni che nascono con un modello non linearizzato. \\
 
 \begin{figure}[h!]
     \centering
@@ -621,8 +621,8 @@ In Figura \ref{fig:risposta_gradino_simulink} è riportata la risposta del siste
 \end{figure}
 
 Abbiamo esplorato il range di condizioni iniziali tali per cui l’uscita del sistema in anello chiuso converge a $h(x_e, u_e)$ e le abbiamo rappresentate tramite due heatmap in Figura \ref{fig:heatmap}: una per il tempo di assestamento e una per la sovraelongazione. 
-Possiamo notare come entrambe dipendano principalmente da $x_{2,e}$, ossia dalla temperatura dell'aria in uscita dal riscaldatore, mentre non dipendono molto da $x_{1,e}$, ossia dalla temperatura del riscaldatore stesso.
-In particolare, abbiamo stabilità per valori sufficientemente grandi di $x_{2,e}$. All'aumentare di $x_{2,e}$, osserviamo un leggero aumento del tempo di assestamento e una diminuzione della sovraelongazione percentuale.\\
+Possiamo notare come entrambe dipendano principalmente da $x_{2e}$, ossia dalla temperatura dell'aria in uscita dal riscaldatore, mentre non dipendono particolarmente da $x_{1e}$, ossia dalla temperatura del riscaldatore stesso.
+In particolare, abbiamo stabilità per valori sufficientemente grandi di $x_{2e}$. All'aumentare di $x_{2e}$, osserviamo un leggero aumento del tempo di assestamento e una diminuzione della sovraelongazione percentuale.\\
 
 \begin{figure}[h!]
     \centering
@@ -631,9 +631,10 @@ In particolare, abbiamo stabilità per valori sufficientemente grandi di $x_{2,e
 	\label{fig:heatmap}
 \end{figure}
 
-Infine abbiamo esplorato il range di ampiezze dei riferimenti a gradino tali per cui il regolaratore rimanesse efficace sul sistema non lineare.
-Innanzitutto, abbiamo testato ampiezze positive. Da tali test è emerso che il sistema si stabilizza indipendentemente dall'ampiezza del gradino, ma sovraelongazione e tempo di assestamento sono direttamente proporzionali all'ampiezza del gradino.
-Successivamente abbiamo provato a utilizzare ampiezze negative per il riferimento a gradino, e i test hanno portato a concludere che circa fino a un'ampiezza pari a -19 il sistema diverge e di conseguenza il regolatore non è più efficace. 
+Infine abbiamo esplorato il range di ampiezze dei riferimenti a gradino tali per cui il regolatore rimanesse efficace sul sistema non lineare.
+Innanzitutto, abbiamo testato ampiezze positive. Da tali test è emerso che il sistema si stabilizza indipendentemente dall'ampiezza del gradino, tuttavia esiste una proporzionalità diretta tra ampiezza del gradino, sovraelongazione e tempo di assestamento.
+
+Successivamente abbiamo provato a utilizzare ampiezze negative per il riferimento a gradino e i test hanno portato a concludere che circa fino a un'ampiezza pari a -19 il sistema diverge e di conseguenza il regolatore non è più efficace. 
 Per valori inferiori, invece, il sistema torna a convergere, ma con tempi di assestamento molto dilatati e verso un valore pari circa a 16.
 La Figura \ref{fig:ampiezze} riassume queste considerazioni.
 
@@ -644,7 +645,6 @@ La Figura \ref{fig:ampiezze} riassume queste considerazioni.
 	\label{fig:ampiezze}
 \end{figure}
 
-% inserire snapshot
 \clearpage
 \section{Punto opzionale: animazione}
 
@@ -663,8 +663,8 @@ In Figura \ref{fig:screenshot} abbiamo riportato uno screenshot dell'animazione.
 
 Andremo in questo breve capitolo conclusivo a sintetizzare quanto fatto.
 
-Iniziando con il lavoro svolto nel primo punto, attraverso un processo di linearizzazione nell’intorno del punto di equilibrio siamo riusciti ad analizzare un sistema non lineare. Trasformando quindi le equazioni che caratterizzano il sistema non lineare ci è stato possibile studiarne il comportamento.
-Tramite il calcolo della funzione di trasferimento e l’analisi in frequenza, abbiamo evidenziato le proprietà del nostro sistema.
+Iniziando con il lavoro svolto nel primo punto, attraverso un processo di linearizzazione nell’intorno del punto di equilibrio siamo riusciti ad analizzare il sistema non lineare. Trasformando quindi le equazioni che caratterizzano il sistema non lineare ci è stato possibile studiarne il comportamento.
+Tramite il calcolo della funzione di trasferimento e l’analisi in frequenza, abbiamo evidenziato le proprietà del sistema.
 
 A questo punto, partendo dalla mappatura delle specifiche fornite abbiamo progettato un regolatore formato dal prodotto di una parte statica e una parte dinamica. La prima si è occupata di imporre il guadagno richiesto, la seconda delle restanti specifiche. In particolare, nel regolatore dinamico ci è stata sufficiente una rete anticipatrice, senza l'introduzione di un polo ad alta frequenza.
 
@@ -673,6 +673,6 @@ Conoscendo le caratteristiche delle varie funzioni di sensività, abbiamo testat
 Nel quinto punto del progetto il sistema non linearizzato è stato ricostruito su SimuLink. Questo test ha evidenziato l’approssimazione della linearizzazione svolta, in quanto si nota il tempo di assestamento in questo caso molto maggiore.
 Inoltre abbiamo studiato in maniera più completa le performance del sistema esplorando il range di condizioni iniziali dello stato e e di ampiezza di riferimenti a gradino per cui il sistema risultava efficace. 
 
-Infine il punto opzionale ci ha permesso di avere un riscontro animato del comportamento del nostro scaldatore. 
+Infine il punto opzionale ci ha permesso di avere un riscontro animato del comportamento dello scaldatore. 
 
 \end{document}
