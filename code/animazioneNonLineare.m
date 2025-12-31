@@ -12,12 +12,10 @@ T_out = uscita(:);
 riferimento_v = riferimento_v(:) + T_out_e; % Riferimento assoluto
 
 % Calcolo errore (Riferimento - Uscita reale)
-% Nota: Se l'errore aumenta drasticamente, verifica che 'uscita' 
-% non sia una variazione (in quel caso dovresti fare T_out = uscita + T_out_e)
 errore_v = riferimento_v - T_out; 
 
 %% 2. PREPARAZIONE ANIMAZIONE
-decim = 2500; % Campionamento per fluidità video
+decim = 2500;  % Campionamento per fluidità video
 idx   = 1:decim:length(tempo);
 
 t_a      = tempo(idx);
@@ -39,7 +37,7 @@ set(axSim, 'XLim', [0 14], 'YLim', [-1 14]);
 rectangle('Position', [4.5, 0.5, 4, 8.5], 'LineStyle', '--', 'EdgeColor', [0.5 0.5 0.5], 'LineWidth', 1.5);
 text(6.5, 9.8, 'SCALDATORE', 'HorizontalAlignment', 'center', 'FontWeight', 'bold', 'FontSize', 14);
 
-% BLOCO SISTEMA - Ora con colore rosso fisso [1 0 0]
+% BLOCCO SISTEMA
 hSistema = rectangle('Position', [5, 5, 3, 3.5], 'Curvature', 0.2, ...
     'LineWidth', 2.5, 'FaceColor', [1 0 0]); 
 
@@ -53,7 +51,7 @@ text(0.5, 8, 'T_{in} (25°C)', 'Color', 'b', 'FontWeight', 'bold');
 quiver(2.5, 2, 2, 0, 0, 'Color', [0.4 0.4 0.4], 'LineWidth', 2); 
 hFrecciaPe = quiver(6.5, 3, 0, 2, 0, 'Color', 'g', 'LineWidth', 2, 'MaxHeadSize', 0.8);
 
-% Sinusoidi Fluido
+% Sinusoidi In/Out
 res = 150;
 x_in = linspace(0.5, 5, res);   
 hSinIn = plot(x_in, 7.2 + 0.4*sin(x_in*10), 'b', 'LineWidth', 2.5);
@@ -66,7 +64,7 @@ hT_rif   = text(2.3, 2, '', 'FontWeight', 'bold', 'HorizontalAlignment', 'right'
 hT_pe    = text(6.7, 4, '', 'Color', [0 0.5 0], 'FontWeight', 'bold');
 hT_tout  = text(12.6, 6.2, '', 'Color', 'r', 'FontWeight', 'bold');
 
-% --- LIMITI GRAFICI TECNICI ---
+% --- LIMITI GRAFICI ---
 y_min_track = min([min(rif_a), min(Tout_a)]) - 2;
 y_max_track = max([max(rif_a), max(Tout_a)]) + 2;
 y_min_err = min(errore_a) - 1;
@@ -95,11 +93,9 @@ for k = 1:length(t_a)
     if ~ishandle(fig), break; end
     phase = phase - 0.4; 
     
-    % Update onde sinusoidali (effetto flusso)
+    % Update onde sinusoidali
     set(hSinIn, 'YData', 7.2 + 0.4*sin(x_in*10 + phase));
     set(hSinOut, 'YData', 6.2 + 0.4*sin(x_out*10 + phase));
-    
-    % Nota: riga 'set(hSistema, FaceColor...)' rimossa per mantenere il rosso fisso
     
     % Update Spessore Freccia Potenza (Pe)
     set(hFrecciaPe, 'LineWidth', min(15, max(1, log10(abs(Pe_a(k)) + 1))));

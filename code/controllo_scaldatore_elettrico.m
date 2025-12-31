@@ -86,7 +86,7 @@ e_star = 0.001;         % errore a regime massimo
 W_star = 50;            % w(t) = W · 1(t) con W <= 50  
 D_star = 2;             % d(t) = D · 1(t) con D <= 2
 
-Mf_star_iniziale = 40;           % margine di fase minimo imposto
+Mf_star_iniziale = 40;  % margine di fase minimo imposto
 S_star = 18;            % sovraelongazione percentuale massima
 T_star = 0.3;           % tempo di assestamento alla ϵ% = 1% massimo (s)
 
@@ -121,8 +121,7 @@ R_s = mu_s;
 G_estesa = R_s*G;
 
 % solo per visualizzione, pulsazione minima e massima
-omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare
-                                % fino a -infinito
+omega_plot_min = 1e-4;          % in realtà sarebbe 0, ma matlab non riesce a renderizzare fino a -infinito
 omega_plot_max = omega_n_max;
 
 
@@ -152,7 +151,7 @@ patch(patch_Mf_x,patch_Mf_y,'r','FaceAlpha',0.1);
 
 %% Design del regolatore dinamico
 % Parametri
-epsilon = 8;        % margine di sicurezza della fase
+epsilon = 8;  % margine di sicurezza della fase
 
 omega_c_star = 70;                                     %  valore arbitrario > omega_c_min
 M_star = 1/abs(evalfr(G_estesa,1j*omega_c_star));      % margine rispetto a Mf_min
