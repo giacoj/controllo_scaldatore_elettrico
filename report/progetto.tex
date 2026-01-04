@@ -44,7 +44,7 @@
 	\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
 
 \newcommand{\courseacronym}{CAT}
-\newcommand{\coursename}{Linea Guida Report\\Controlli Automatici - T}
+\newcommand{\coursename}{Report\\Progetto \tipology{}\trace \\Controlli Automatici T}
 \newcommand{\tipology}{B}
 \newcommand{\trace}{1}
 \newcommand{\projectname}{Controllo di uno scaldatore elettrico}
@@ -55,23 +55,37 @@
 \newcommand{\myphi}{\dfrac{h_RA_R}{m_Ac_A}}
 
 %opening
-\title{ \vspace{-1in}
-		\huge \strut \coursename \strut 
-		\\
-		\Large  \strut Progetto Tipologia \tipology - Traccia \trace 
-		\\
-		\Large  \strut \projectname\strut
-		\\
-		\Large  \strut Gruppo \group\strut
-		\vspace{-0.4cm}
-}
-\author{Nobili Giacomo, Raffoni Federico, Roca Marco}
-\date{}
-
 \begin{document}
 
-\maketitle
-\vspace{-0.5cm}
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Huge \bfseries \coursename \par}
+\vspace{0.8cm}
+
+{\huge \projectname \par}
+
+\vspace{0.6cm}
+{\LARGE Anno Accademico 2025--2026 \par}
+
+\vspace{0.6cm}
+
+{\LARGE Gruppo \group \par}
+\vspace{0.8cm}
+\vfill
+{\Large
+Nobili Giacomo \\
+Raffoni Federico \\
+Roca Marco \par
+}
+
+\vspace{0.8cm}
+
+\end{titlepage}
+\setcounter{page}{1}
+\tableofcontents
+\clearpage
+\section{Introduzione}
 
 Il progetto riguarda il controllo di uno scaldatore elettrico, la cui dinamica viene descritta dalle seguenti equazioni differenziali 
 %
@@ -589,7 +603,7 @@ In Figura \ref{fig:risposta_n} è illustrata la risposta del sistema al disturbo
 Come possiamo notare, in entrambi i casi l’uscita viene quasi totalmente abbattuta. Questo accade perché nella progettazione del nostro regolatore abbiamo sfruttato una caratteristica importante dei due disturbi $d(t)$ e $n(t)$: entrambi hanno le proprie bande limitate in opportuni range. $d(t)$
 infatti ha bande a bassa frequenza, mentre $n(t)$ lavora con bande ad alta frequenza.
 Il regolatore è stato costruito in modo da avere $S(j\omega)$ $\ll$ $1$ a basse frequenze e $F(j\omega) \ll 1$ ad alte frequenze, provando in questo modo ad abbattere entrambi i disturbi. I risultati ottenuti sono quindi in accordo con le specifiche del problema.
-\newpage
+%\newpage
 \section{Test sul sistema non lineare}
 
 In questa sezione, testiamo l'efficacia del controllore progettato sul modello non lineare su Simulink.
@@ -667,12 +681,9 @@ Iniziando con il lavoro svolto nel primo punto, attraverso un processo di linear
 Tramite il calcolo della funzione di trasferimento e l’analisi in frequenza, abbiamo evidenziato le proprietà del sistema.
 
 A questo punto, partendo dalla mappatura delle specifiche fornite abbiamo progettato un regolatore formato dal prodotto di una parte statica e una parte dinamica. La prima si è occupata di imporre il guadagno richiesto, la seconda delle restanti specifiche. In particolare, nel regolatore dinamico ci è stata sufficiente una rete anticipatrice, senza l'introduzione di un polo ad alta frequenza.
-
 Conoscendo le caratteristiche delle varie funzioni di sensività, abbiamo testato il sistema ottenuto con 3 ingressi differenti: un ingresso a gradino e disturbi d’uscita e di misura sinusoidali. Con le rappresentazioni grafiche delle risposte abbiamo appurato come anche in questo caso le specifiche siano state rispetatte e, in particolare, come i due rumori siano stati quasi totalmente abbattuti garantendo ulteriormente la robustezza del regolatore progettato.
-
 Nel quinto punto del progetto il sistema non linearizzato è stato ricostruito su SimuLink. Questo test ha evidenziato l’approssimazione della linearizzazione svolta, in quanto si nota il tempo di assestamento in questo caso molto maggiore.
 Inoltre abbiamo studiato in maniera più completa le performance del sistema esplorando il range di condizioni iniziali dello stato e e di ampiezza di riferimenti a gradino per cui il sistema risultava efficace. 
-
 Infine il punto opzionale ci ha permesso di avere un riscontro animato del comportamento dello scaldatore. 
 
 \end{document}

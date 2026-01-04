@@ -1,0 +1,12 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
+\contentsline {section}{\numberline {2}Espressione del sistema in forma di stato e calcolo del sistema linearizzato intorno ad una coppia di equilibrio}{2}{section.2}%
+\contentsline {section}{\numberline {3}Calcolo Funzione di Trasferimento}{4}{section.3}%
+\contentsline {section}{\numberline {4}Mappatura specifiche del regolatore}{6}{section.4}%
+\contentsline {section}{\numberline {5}Sintesi del regolatore statico}{7}{section.5}%
+\contentsline {section}{\numberline {6}Sintesi del regolatore dinamico}{9}{section.6}%
+\contentsline {section}{\numberline {7}Test sul sistema linearizzato}{11}{section.7}%
+\contentsline {section}{\numberline {8}Test sul sistema non lineare}{14}{section.8}%
+\contentsline {section}{\numberline {9}Punto opzionale: animazione}{17}{section.9}%
+\contentsline {section}{\numberline {10}Conclusioni}{17}{section.10}%
