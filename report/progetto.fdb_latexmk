@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1767522475.81513 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1767522477.15332 0
+["pdflatex"] 1767603422.00608 "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" "progetto.pdf" "progetto" 1767603423.26553 0
   "../figs/Esplorazione_range_equilibri.pdf" 1767090873.77991 17448 69ea7587272dcfb8b889089f3041d9fb ""
   "../figs/G_diagram.pdf" 1765982338.90917 20712 20e42b2eeb55fc204187ee1b6067873c ""
   "../figs/G_estesa.pdf" 1765982338.91017 29221 78ff98a26ce02b099dac5cc55078ecad ""
@@ -14,7 +14,7 @@
   "../figs/risposta_non_linearizzato.pdf" 1766824494.539 53616 9a7e6c6111996c80659daeef335e96b4 ""
   "../figs/simulatore_non_lineare.pdf" 1767090873.78091 77834 2f3217aefef9a8b43a0bebef2f7e8e84 ""
   "/etc/texmf/web2c/texmf.cnf" 1759752535.30532 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1767522475.53363 29540 b0eaf3bf406fc45cf0869c76b0148c15 ""
+  "/home/giaco/controllo_scaldatore_elettrico/report/progetto.tex" 1767603421.58346 29489 44decff6afc1e0cf8495c21d57efcd97 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm" 1136768653 1536 12e8c510d3e158fdd0e9a42e75118bd9 ""
@@ -231,10 +231,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1763907094.92903 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1763907120 8214466 d82ca926959f88ddd4c2070af4adcba1 ""
-  "progetto.aux" 1767522477.02367 6282 eb9c6cf92e9e738ff86f080837649586 "pdflatex"
-  "progetto.out" 1767522477.02467 2286 23b60600449e0ae418138bbfd1c6e792 "pdflatex"
-  "progetto.tex" 1767522475.53363 29540 b0eaf3bf406fc45cf0869c76b0148c15 ""
-  "progetto.toc" 1767522477.02567 974 9684ff461d3b5250f9aef6cbec66dccd "pdflatex"
+  "progetto.aux" 1767603423.12549 6282 eb9c6cf92e9e738ff86f080837649586 "pdflatex"
+  "progetto.out" 1767603423.12749 2286 23b60600449e0ae418138bbfd1c6e792 "pdflatex"
+  "progetto.tex" 1767603421.58346 29489 44decff6afc1e0cf8495c21d57efcd97 ""
+  "progetto.toc" 1767603423.12749 974 9684ff461d3b5250f9aef6cbec66dccd "pdflatex"
   (generated)
   "progetto.aux"
   "progetto.log"

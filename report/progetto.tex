@@ -600,8 +600,8 @@ Di conseguenza si ottiene
 \end{figure}
 
 In Figura \ref{fig:risposta_n} è illustrata la risposta del sistema al disturbo $n(t)$.
-Come possiamo notare, in entrambi i casi l’uscita viene quasi totalmente abbattuta. Questo accade perché nella progettazione del nostro regolatore abbiamo sfruttato una caratteristica importante dei due disturbi $d(t)$ e $n(t)$: entrambi hanno le proprie bande limitate in opportuni range. $d(t)$
-infatti ha bande a bassa frequenza, mentre $n(t)$ lavora con bande ad alta frequenza.
+Come possiamo notare, in entrambi i casi l’uscita viene quasi totalmente abbattuta. Questo accade perché nella progettazione del nostro regolatore abbiamo sfruttato una caratteristica importante dei due disturbi $d(t)$ e $n(t)$:
+il primo presenta componenti frequenziali solo a basse frequenze, mentre il secondo in quelle elevate.
 Il regolatore è stato costruito in modo da avere $S(j\omega)$ $\ll$ $1$ a basse frequenze e $F(j\omega) \ll 1$ ad alte frequenze, provando in questo modo ad abbattere entrambi i disturbi. I risultati ottenuti sono quindi in accordo con le specifiche del problema.
 %\newpage
 \section{Test sul sistema non lineare}
